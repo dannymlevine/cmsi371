@@ -50,13 +50,16 @@ ctx.lineTo(170,160)
 ctx.moveTo(170,160)
 ctx.lineTo(155,145)
 ctx.moveTo(155,145)
-ctx.arc(155,145,10,0,Math.PI*2,true);
+ctx.arc(155,145,7,0,Math.PI*2,true);
 ctx.closePath();
 ctx.stroke();
 ctx.fill();
 
 ctx.beginPath();
-
+ctx.moveTo(155,145)
+ctx.lineTo(168,195)
+ctx.lineTo(180,145)
+ctx.arc(180,145,7,0,Math.PI*2,true);
 ctx.closePath();
 ctx.stroke();
 ctx.fill();
