@@ -1,59 +1,67 @@
-var canvas = document.getElementById('tutorial');
+var canvas = document.getElementById('Meeseeks');
 var ctx = canvas.getContext('2d');
 console.log(ctx)
 
 
 
 
-//left side
-ctx.moveTo(200,200)
-ctx.lineTo(200,280)
-ctx.lineTo(175,280)
-ctx.lineTo(190,265)
-ctx.lineTo(190,200)
-ctx.quadraticCurveTo(180,180,185,140)
-ctx.moveTo(185,142)
-ctx.lineTo(155,165)
-ctx.lineTo(175,180)
-ctx.quadraticCurveTo(185,180,185,190)
-ctx.quadraticCurveTo(180,198,175,195)
-ctx.lineTo(145,165)
-ctx.lineTo(185,130)
-ctx.quadraticCurveTo(150,100,195,81)
-ctx.quadraticCurveTo(240,100,205,130)
+var body=function(){
+    //left side
+    ctx.fillStyle="rgb(0,191,255)";
+    ctx.moveTo(0,0);
+    ctx.lineTo(0,80);
+    ctx.lineTo(-25,80);
+    ctx.lineTo(-10,65);
+    ctx.lineTo(-10,0);
+    ctx.quadraticCurveTo(-20,-20,-15,-60);
+    ctx.moveTo(-15,-58);
+    ctx.lineTo(-45,-35);
+    ctx.lineTo(-25,-20);
+    ctx.quadraticCurveTo(-15,-20,-15,-10);
+    ctx.quadraticCurveTo(-20,-2,-25,-5);
+    ctx.lineTo(-55,-35);
+    ctx.lineTo(-15,-70);
+    ctx.quadraticCurveTo(-50,-100,-5,-119);
+    ctx.quadraticCurveTo(40,-100,5,-70);
+    //right side
+    ctx.moveTo(0,0);
+    ctx.lineTo(8,0);
+    ctx.lineTo(8,80);
+    ctx.lineTo(33,80);
+    ctx.lineTo(18,65);
+    ctx.lineTo(18,0);
+    ctx.quadraticCurveTo(28,-20,13,-60);
+    ctx.lineTo(53,-50);
+    ctx.lineTo(57,-80);
+    ctx.quadraticCurveTo(65,-110,45,-85);
+    ctx.quadraticCurveTo(35,-95,45,-75);
+    ctx.lineTo(45,-60);
+    ctx.lineTo(6,-70);
+    ctx.fill();
+    ctx.stroke();
+    },
+    face=function(){
+    //face
+    ctx.moveTo(-10,-95);
+    ctx.arc(-10,-95,2,0,Math.PI*2,true);
+    ctx.moveTo(0,-95);
+    ctx.arc(0,-95,2,0,Math.PI*2,true);
+    ctx.moveTo(-17,-100);
+    ctx.quadraticCurveTo(-16,-102,-10,-105);
+    ctx.moveTo(5,-100);
+    ctx.quadraticCurveTo(3,-102,0,-105);
+    ctx.moveTo(-13,-85);
+    ctx.quadraticCurveTo(-3,-80,0,-85);
+    ctx.moveTo(-15,-80);
+    ctx.quadraticCurveTo(-19,-88,-15,-88);
+    ctx.moveTo(2,-80);
+    ctx.quadraticCurveTo(6,-88,2,-88);
+    ctx.stroke();
+    };
+ctx.translate(200,200);
+body();
+face();
 
-//right side
-ctx.moveTo(200,200)
-ctx.lineTo(208,200)
-ctx.lineTo(208,280)
-ctx.lineTo(233,280)
-ctx.lineTo(218,265)
-ctx.lineTo(218,200)
-ctx.quadraticCurveTo(228,180,213,140)
-ctx.lineTo(253,150)
-ctx.lineTo(257,120)
-ctx.quadraticCurveTo(265,90,245,115)
-ctx.quadraticCurveTo(235,105,245,125)
-ctx.lineTo(245,140)
-ctx.lineTo(206,130)
-ctx.stroke()
-
-//face
-ctx.moveTo(190,105)
-ctx.arc(190,105,2,0,Math.PI*2,true)
-ctx.moveTo(200,105)
-ctx.arc(200,105,2,0,Math.PI*2,true)
-ctx.moveTo(183,100)
-ctx.quadraticCurveTo(184,98,190,95)
-ctx.moveTo(205,100)
-ctx.quadraticCurveTo(203,98,200,95)
-ctx.moveTo(187,115)
-ctx.quadraticCurveTo(197,120,200,115)
-ctx.moveTo(185,120)
-ctx.quadraticCurveTo(181,112,185,112)
-ctx.moveTo(202,120)
-ctx.quadraticCurveTo(206,112,202,112)
-ctx.stroke()
 
 
 
