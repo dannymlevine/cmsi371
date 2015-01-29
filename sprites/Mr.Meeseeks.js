@@ -92,21 +92,17 @@ fillBody = function () {
 
 drawMeeseeks = function (ctx, handPos) {
     if (handPos === 0) {
-        body();
-        rightHand();
-        face();
-        fillBody();
+        body(ctx);
+        rightHand(ctx);
+        face(ctx);
+        fillBody(ctx);
     } else if (handPos === 1) {
-        body();
-        rightHand2();
-        face();
-        fillBody();
+        body(ctx);
+        rightHand2(ctx);
+        face(ctx);
+        fillBody(ctx);
     }
 }
 
 
 
-ctx.translate(200, 200);
-drawMeeseeks(ctx, 1)
-ctx.translate(100, 100)
-drawMeeseeks(ctx, 0)

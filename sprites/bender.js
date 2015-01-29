@@ -5,7 +5,7 @@ console.log(ctx)
 //(function () {
 //window.LevineSprites = window.LevineSprites || {};
 //window.LevineSprites.bender = (function () {
-legs = function () {
+legs = function (ctx) {
     ctx.fillStyle = "#BCC6CC";
     //left leg
     ctx.fillRect(-33, -30, 15, 5);
@@ -46,7 +46,7 @@ legs = function () {
     ctx.stroke();
 },
 
-body = function () {
+body = function (ctx) {
     //body
     ctx.fillRect(-35, -105, 50, 50);
     ctx.strokeRect(-35, -105, 50, 50);
@@ -60,7 +60,7 @@ body = function () {
 },
 
 
-arms = function () {
+arms = function (ctx) {
     //right arm
     ctx.fillRect(15, -100, 18, 15);
     ctx.fillRect(20, -100, 18, 15);
@@ -145,7 +145,7 @@ arms = function () {
     ctx.strokeRect(-81, -103, 4, 4);
 },
 
-head = function () {
+head = function (ctx) {
     //head
     ctx.beginPath();
     ctx.moveTo(-24, -105);
@@ -157,7 +157,7 @@ head = function () {
     ctx.stroke();
 },
 
-antennaUp = function () {
+antennaUp = function (ctx) {
     //antenna
     ctx.moveTo(-14, -139);
     ctx.lineTo(-12, -150);
@@ -168,14 +168,14 @@ antennaUp = function () {
     ctx.stroke();
 },
 
-antennaDown = function () {
+antennaDown = function (ctx) {
     ctx.moveTo(-12, -140)
     ctx.arc(-12, -140, 2, 0, Math.PI * 2, true);
     ctx.fill();
     ctx.stroke();
 }
 
-face = function () {
+face = function (ctx) {
     //eyes
     ctx.fillStyle = "#FEF1B5";
     ctx.beginPath();
@@ -209,19 +209,19 @@ face = function () {
 
 drawBender = function (ctx, antennaPos) {
     if (antennaPos === 0) {
-        legs();
-        body();
-        arms();
-        head();
-        antennaDown();
-        face();
+        legs(ctx);
+        body(ctx);
+        arms(ctx);
+        head(ctx);
+        antennaDown(ctx);
+        face(ctx);
     } else if (antennaPos === 1) {
-        legs();
-        body();
-        arms();
-        head();
-        antennaUp();
-        face();
+        legs(ctx);
+        body(ctx);
+        arms(ctx);
+        head(ctx);
+        antennaUp(ctx);
+        face(ctx);
     }
 }
 //return {
@@ -229,7 +229,4 @@ drawBender = function (ctx, antennaPos) {
 //}
 // })();
 //}());
-ctx.translate(200, 200)
-drawBender(ctx, 0);
-ctx.translate(100, 100);
-drawBender(ctx, 1);
+

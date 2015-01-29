@@ -155,10 +155,3 @@ drawSpaceship = function (ctx, flying) {
         flames();
     }
 }
-
-
-ctx.translate(200, 100)
-drawSpaceship(ctx, 0)
-ctx.translate(100, 200)
-drawSpaceship(ctx, 1)
-
