@@ -1,18 +1,22 @@
 <!doctype html>
 <html>
+    
     <head>
         <title>Bender</title>
-        <meta charset="utf-8"/>
+        <meta charset="utf-8" />
     </head>
+    
     <body>
         <canvas id="Bender" width="400" height="400" style="border: 1px solid black"></canvas>
         <script src="bender.js"></script>
         <script type="text/javaScript">
+            var canvas = document.getElementById('Bender');
+            var ctx = canvas.getContext('2d');
             ctx.translate(200, 200)
-            drawBender(ctx, 0);
+             LevineSprites.drawBender(ctx, 0);
             ctx.translate(100, 100);
-            drawBender(ctx, 1);
+            LevineSprites.drawBender(ctx, 1);
         </script>
-
     </body>
+
 </html>

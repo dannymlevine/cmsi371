@@ -1,21 +1,32 @@
 <!doctype html>
 <html>
+
     <head>
         <title>Combo</title>
-        <meta charset="utf-8"/>
+        <meta charset="utf-8" />
     </head>
+    
     <body>
-        <canvas id="Meeseeks Bender spaceShip" width="400" height="400" style="border: 1px solid black"></canvas>
+        <canvas id="combo" width="800" height="800" style="border: 1px solid black"></canvas>
         <script src="Mr.Meeseeks.js"></script>
         <script src="PlanetExpressSpaceship.js"></script>
         <script src="bender.js"></script>
         <script type="text/javaScript">
+            var canvas = document.querySelector("#combo");
+            var ctx = canvas.getContext('2d');
             ctx.translate(200, 200)
-            drawBender(ctx, 0);
-            ctx.translate(100, 100);
-            drawBender(ctx, 1);
+             LevineSprites.drawBender(ctx, 0);
+            ctx.translate(200, 0)
+             LevineSprites.drawBender(ctx, 1);
+            ctx.translate(-200, 100);
+            LevineSprites.drawSpaceship(ctx, 0);
+            ctx.translate(250, 0);
+            LevineSprites.drawSpaceship(ctx, 1);
+            ctx.translate(-250, 200)
+             LevineSprites.drawMeeseeks(ctx, 0);
+            ctx.translate(200, 0)
+             LevineSprites.drawMeeseeks(ctx, 1);
         </script>
-
-
     </body>
+    
 </html>

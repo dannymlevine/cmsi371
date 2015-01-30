@@ -1,18 +1,22 @@
 <!doctype html>
 <html>
+    
     <head>
         <title>Planet Express Ship</title>
-        <meta charset="utf-8"/>
+        <meta charset="utf-8" />
     </head>
+    
     <body>
         <canvas id="spaceShip" width="400" height="400" style="border: 1px solid black"></canvas>
         <script src="PlanetExpressSpaceship.js"></script>
-        <script type="text/javaScript"> 
+        <script type="text/javaScript">
+            var canvas = document.getElementById('spaceShip');
+            var ctx = canvas.getContext('2d');
             ctx.translate(200, 200)
-            drawSpaceship(ctx, 0);
+             LevineSprites.drawSpaceship(ctx, 0);
             ctx.translate(100, 100);
-            drawSpaceship(ctx, 1);
+            LevineSprites.drawSpaceship(ctx, 1);
         </script>
-
     </body>
+
 </html>
