@@ -26,7 +26,7 @@
         ctx.lineTo(18, 65);
         ctx.lineTo(18, 0);
         ctx.quadraticCurveTo(28, -20, 13, -60);
-    },
+    }, // JD: 1
     rightHand = function (ctx) {
         ctx.moveTo(13, -60);
         ctx.lineTo(53, -50);
@@ -38,7 +38,7 @@
         ctx.fill();
         ctx.stroke();
     },
-    rightHand2 = function (ctx) {
+    rightHand2 = function (ctx) { // JD: 2
         ctx.moveTo(13, -60);
         ctx.lineTo(53, -50);
         ctx.lineTo(80, -80);
@@ -86,18 +86,33 @@
     if (!window.LevineSprites) {
         window.LevineSprites = {};
     }
-    window.LevineSprites.drawMeeseeks = function (ctx, handPos) {
-        if (handPos === 0) {
+    window.LevineSprites.drawMeeseeks = function (ctx, handPos) { // JD: 3
+        if (handPos === 0) { // JD: 4
             body(ctx);
             rightHand(ctx);
             face(ctx);
             fillBody(ctx);
         } else if (handPos === 1) {
             body(ctx);
-            rightHand2(ctx);
+            rightHand2(ctx); // JD: 5
             face(ctx);
             fillBody(ctx);
         }
+
+        /* JD: 5 ...compare to:
+
+        body(ctx);
+
+        if (handPos === 0) {
+            rightHand(ctx);
+        } else if (handPos === 1) {
+            rightHand2(ctx);
+        }
+
+        face(ctx);
+        fillBody(ctx);
+
+        */
     };
 })();
 

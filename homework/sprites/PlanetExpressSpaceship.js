@@ -132,8 +132,8 @@
     if (!window.LevineSprites) {
         window.LevineSprites = {};
     }
-    window.LevineSprites.drawSpaceship = function (ctx, flying) {
-        if (flying === 0) {
+    window.LevineSprites.drawSpaceship = function (ctx, flying) { // JD: 3
+        if (flying === 0) { // JD: 4
             topHull(ctx);
             wing(ctx);
             lowerHull(ctx);
@@ -148,7 +148,21 @@
             windows(ctx);
             windshield(ctx);
             engine(ctx);
+            flames(ctx); // JD: 6
+        }
+
+        /* JD: 6 ...compare above to this:
+
+        topHull(ctx);
+        wing(ctx);
+        lowerHull(ctx);
+        windows(ctx);
+        windshield(ctx);
+        engine(ctx);
+        if (flying === 1) {
             flames(ctx);
         }
+
+        */
     };
 })();

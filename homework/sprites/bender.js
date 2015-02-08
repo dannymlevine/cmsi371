@@ -203,13 +203,13 @@
     if (!window.LevineSprites) {
         window.LevineSprites = {};
     }
-    window.LevineSprites.drawBender = function (ctx, antennaPos) {
-        if (antennaPos === 0) {
+    window.LevineSprites.drawBender = function (ctx, antennaPos) { // JD: 3
+        if (antennaPos === 0) { // JD: 4
             legs(ctx);
             body(ctx);
             arms(ctx);
             head(ctx);
-            antennaDown(ctx);
+            antennaDown(ctx); // JD: 5, 6
             face(ctx);
         } else if (antennaPos === 1) {
             legs(ctx);
