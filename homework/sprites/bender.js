@@ -53,7 +53,6 @@
         ctx.stroke();
     },
 
-
     arms = function (ctx) {
         //right arm
         ctx.fillRect(15, -100, 18, 15);
@@ -204,20 +203,17 @@
         window.LevineSprites = {};
     }
     window.LevineSprites.drawBender = function (ctx, antennaPos) { // JD: 3
-        if (antennaPos === 0) { // JD: 4
-            legs(ctx);
-            body(ctx);
-            arms(ctx);
-            head(ctx);
+        // JD: 4
+        legs(ctx);
+        body(ctx);
+        arms(ctx);
+        head(ctx);
+        if (antennaPos === 0) {
             antennaDown(ctx); // JD: 5, 6
-            face(ctx);
         } else if (antennaPos === 1) {
-            legs(ctx);
-            body(ctx);
-            arms(ctx);
-            head(ctx);
             antennaUp(ctx);
-            face(ctx);
         }
-    };
+        face(ctx);
+    }
+};
 })();
