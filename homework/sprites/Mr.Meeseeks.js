@@ -26,18 +26,21 @@
         ctx.lineTo(18, 65);
         ctx.lineTo(18, 0);
         ctx.quadraticCurveTo(28, -20, 13, -60);
-    }, // JD: 1
-    rightHand = function (ctx) {
+    }, 
+    // JD: 1
+    rightHand = function (ctx,handPosition) {
+        handPosition=handPosition*13
         ctx.moveTo(13, -60);
         ctx.lineTo(53, -50);
-        ctx.lineTo(57, -80);
-        ctx.quadraticCurveTo(65, -110, 45, -85);
-        ctx.quadraticCurveTo(35, -95, 45, -75);
+        ctx.lineTo(57 + handPosition, -80);
+        ctx.quadraticCurveTo(65 + handPosition, -110, 45 + handPosition, -85);
+        ctx.quadraticCurveTo(35 + handPosition, -95, 45+ handPosition, -75);
         ctx.lineTo(45, -60);
         ctx.lineTo(6, -70);
         ctx.fill();
         ctx.stroke();
     },
+
     rightHand2 = function (ctx) { // JD: 2
         ctx.moveTo(13, -60);
         ctx.lineTo(53, -50);
@@ -49,6 +52,7 @@
         ctx.fill();
         ctx.stroke();
     },
+
     face = function (ctx) {
         //face
         ctx.moveTo(-10, -95);
@@ -67,6 +71,7 @@
         ctx.quadraticCurveTo(6, -88, 2, -88);
         ctx.stroke();
     },
+
     fillBody = function (ctx) {
         ctx.beginPath();
         ctx.moveTo(0, 0);
@@ -83,36 +88,14 @@
         ctx.fill();
 
     };
+
     if (!window.LevineSprites) {
         window.LevineSprites = {};
     }
-    window.LevineSprites.drawMeeseeks = function (ctx, handPos) { // JD: 3
-        if (handPos === 0) { // JD: 4
-            body(ctx);
-            rightHand(ctx);
-            face(ctx);
-            fillBody(ctx);
-        } else if (handPos === 1) {
-            body(ctx);
-            rightHand2(ctx); // JD: 5
-            face(ctx);
-            fillBody(ctx);
-        }
-
-        /* JD: 5 ...compare to:
-
+    window.LevineSprites.drawMeeseeks = function (ctx, handPosition) { // JD: 3
         body(ctx);
-
-        if (handPos === 0) {
-            rightHand(ctx);
-        } else if (handPos === 1) {
-            rightHand2(ctx);
-        }
-
+        rightHand(ctx, handPosition);
         face(ctx);
         fillBody(ctx);
-
-        */
     };
 })();
-
