@@ -138,6 +138,40 @@
             },
 
             {
+                draw: LevineSprites.drawSpaceship,
+                keyframes:[
+                    {
+                        frame: 40,
+                        tx: 400,
+                        ty: 600,
+                        landing: 0
+                    },
+
+                    {
+                        frame: 70,
+                        tx: 400,
+                        ty: 600,
+                        landing: 1
+                    },
+
+                    {
+                        frame: 120,
+                        tx: 800,
+                        ty: 600,
+                        landing: 0
+                    },
+
+                    {
+                        frame: 150,
+                        tx: 800,
+                        ty: 600,
+                        landing: 1
+                    }
+                ]
+
+            },
+
+            {
                 draw: circle,
                 keyframes: [
                     {

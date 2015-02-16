@@ -100,6 +100,9 @@
                                 hand = startKeyframe.handPosition || 0,
                                 handDistance = (endKeyframe.hand || 0) - hand,
 
+                                land = startKeyframe.landPosition || 0,
+                                landDistance = (endKeyframe.land || 0) - land,
+
                                 rotateStart = (startKeyframe.rotate || 0) * Math.PI / 180,
                                 rotateDistance = (endKeyframe.rotate || 0) * Math.PI / 180 - rotateStart;
 
@@ -120,8 +123,8 @@
                             );
 
                             // Draw the sprite.
-                            console.log(rightLeg,rightLegDistance,duration)
-                            sprites[i].draw(renderingContext,(hand||leftLeg),rightLeg);
+                            console.log(land,landDistance,duration)
+                            sprites[i].draw(renderingContext,(land||leftLeg|| hand),rightLeg);
                             // {
                             //     leftLegPosition: Math.floor(ease(currentTweenFrame,leftLeg,leftLegDistance,duration))
                             // }

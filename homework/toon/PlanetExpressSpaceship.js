@@ -61,12 +61,12 @@
         ctx.stroke();
     },
 
-    landingGear = function (ctx) {
+    landingGear = function (ctx,landing) {
         ctx.fillStyle = "#00FA9A";
-        ctx.moveTo(40, 20);
-        ctx.lineTo(62, 40);
-        ctx.lineTo(70, 40);
-        ctx.lineTo(43, 15);
+        ctx.moveTo(40, 20 * landing );
+        ctx.lineTo(62, 40 * landing );
+        ctx.lineTo(70, 40 * landing);
+        ctx.lineTo(43, 15 *landing);
         ctx.fill();
         ctx.stroke();
     },
@@ -106,6 +106,7 @@
         ctx.lineTo(-160, 25);
         ctx.quadraticCurveTo(-135, 40, -130, 20);
         ctx.closePath();
+        ctx.fillStyle = "#F5F5DC";
         ctx.fill();
         ctx.stroke();
     },
@@ -132,37 +133,17 @@
     if (!window.LevineSprites) {
         window.LevineSprites = {};
     }
-    window.LevineSprites.drawSpaceship = function (ctx, flying) { // JD: 3
-        if (flying === 0) { // JD: 4
-            topHull(ctx);
-            wing(ctx);
-            lowerHull(ctx);
-            landingGear(ctx);
-            windows(ctx);
-            windshield(ctx);
-            engine(ctx);
-        } else if (flying === 1) {
-            topHull(ctx);
-            wing(ctx);
-            lowerHull(ctx);
-            windows(ctx);
-            windshield(ctx);
-            engine(ctx);
-            flames(ctx); // JD: 6
-        }
-
-        /* JD: 6 ...compare above to this:
-
+    window.LevineSprites.drawSpaceship = function (ctx,landing) { // JD: 3
         topHull(ctx);
+        engine(ctx);
+        windshield(ctx);
+        windows(ctx);
         wing(ctx);
         lowerHull(ctx);
-        windows(ctx);
-        windshield(ctx);
-        engine(ctx);
-        if (flying === 1) {
+        landingGear(ctx,landing);
+        if (landing === 0) {
             flames(ctx);
         }
-
-        */
+            
     };
 })();
