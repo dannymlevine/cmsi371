@@ -104,6 +104,40 @@
             },
 
             {
+                draw: LevineSprites.drawMeeseeks,
+                keyframes:[
+                    {
+                        frame: 40,
+                        tx: 400,
+                        ty: 200,
+                        handPosition: 0
+                    },
+
+                    {
+                        frame: 70,
+                        tx: 400,
+                        ty: 200,
+                        handPosition: 1
+                    },
+
+                    {
+                        frame: 120,
+                        tx: 400,
+                        ty: 200,
+                        handPosition: 0
+                    },
+
+                    {
+                        frame: 150,
+                        tx: 400,
+                        ty: 200,
+                        handPosition: 0
+                    }
+                ]
+
+            },
+
+            {
                 draw: circle,
                 keyframes: [
                     {
