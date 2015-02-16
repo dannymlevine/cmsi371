@@ -27,29 +27,79 @@
         // has a drawing function and an array of keyframes.
         sprites = [
             {
-                draw: square,
+                draw: LevineSprites.drawBender ,
                 keyframes: [
+                    // {
+                    //     frame: 0,
+                    //     tx: 700,
+                    //     ty: 200,
+                    //     sx: .1,
+                    //     sy: .1,
+                    //     ease: KeyframeTweener.linear
+                    // },
+
                     {
                         frame: 0,
-                        tx: 20,
-                        ty: 20,
+                        tx: 600,
+                        ty: 200,
+                        leftLegPosition: 0,
+                        rightLegPosition: 1,
                         ease: KeyframeTweener.linear
                     },
 
                     {
-                        frame: 30,
-                        tx: 100,
-                        ty: 50,
-                        ease: KeyframeTweener.quadEaseInOut
+                        frame: 5,
+                        tx: 550,
+                        ty: 200,
+                        leftLegPosition: 1,
+                        rightLegPosition: 0,
+                        ease: KeyframeTweener.linear
                     },
 
-                    // The last keyframe does not need an easing function.
                     {
-                        frame: 80,
-                        tx: 80,
-                        ty: 500,
-                        rotate: 60 // Keyframe.rotate uses degrees.
+                        frame: 10,
+                        tx: 500,
+                        ty: 200,
+                        leftLegPosition: 0,
+                        rightLegPosition: 1,
+                        ease: KeyframeTweener.linear
+                    },
+
+                    {
+                        frame: 15,
+                        tx: 450,
+                        ty: 200,
+                        leftLegPosition: 1,
+                        rightLegPosition: 0,
+                        ease: KeyframeTweener.linear
+                    },
+
+                    {
+                        frame: 20,
+                        tx: 450,
+                        ty: 200,
+                        leftLegPosition: 0,
+                        rightLegPosition: 1,
+                        ease: KeyframeTweener.linear
                     }
+
+                    // // The last keyframe does not need an easing function.
+                    // {
+                    //     frame: 100,
+                    //     tx: 300,
+                    //     ty: 0,
+                    //     leftLegPosition: 1,
+                    //     //rightLegPosition: 0,
+                    //     rotate: 60 // Keyframe.rotate uses degrees.
+                    // },
+
+                    // // {
+                    // //     frame: 150,
+                    // //     tx: 300,
+                    // //     ty: 600,
+                    // //     leftLegPosition: 0,
+                    // //     ease: KeyframeTweener.quadEaseOut
+                    // // }
                 ]
             },
 

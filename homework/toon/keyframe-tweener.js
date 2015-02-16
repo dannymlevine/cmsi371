@@ -39,6 +39,8 @@
             width = settings.width,
             height = settings.height,
             sprites = settings.sprites,
+            //options = settings.options,
+            //options2 = settings.options2
 
             previousTimestamp = null,
             nextFrame = function (timestamp) {
@@ -89,6 +91,12 @@
                                 syStart = startKeyframe.sy || 1,
                                 syDistance = (endKeyframe.sy || 1) - syStart,
 
+                                leftLeg = startKeyframe.leftLegPosition || 0,
+                                leftLegDistance = (endKeyframe.leftLeg || 0) - leftLeg,
+
+                                rightLeg = startKeyframe.rightLegPosition || 0,
+                                rightLegDistance = (endKeyframe.rightLeg || 0) - rightLeg,
+
                                 rotateStart = (startKeyframe.rotate || 0) * Math.PI / 180,
                                 rotateDistance = (endKeyframe.rotate || 0) * Math.PI / 180 - rotateStart;
 
@@ -109,8 +117,11 @@
                             );
 
                             // Draw the sprite.
-                            sprites[i].draw(renderingContext);
-
+                            console.log(leftLeg,leftLegDistance,duration)
+                            sprites[i].draw(renderingContext,leftLeg,rightLeg);
+                            // {
+                            //     leftLegPosition: Math.floor(ease(currentTweenFrame,leftLeg,leftLegDistance,duration))
+                            // }
                             // Clean up.
                             renderingContext.restore();
                         }
