@@ -63,8 +63,8 @@
 
     landingGear = function (ctx,landing) {
         ctx.fillStyle = "#00FA9A";
-        ctx.moveTo(40, 20 * landing );
-        ctx.lineTo(62, 40 * landing );
+        ctx.moveTo(40, 20 * landing);
+        ctx.lineTo(62, 40 * landing);
         ctx.lineTo(70, 40 * landing);
         ctx.lineTo(43, 15 *landing);
         ctx.fill();

@@ -1,9 +1,6 @@
 (function () {
     leftLeg = function (ctx,legPosition) {
         ctx.fillStyle = "#BCC6CC";
-        if(legPosition==null){
-            legPosition=0
-        }
         //left leg
         legPosition=legPosition*-10;
         if(legPosition>0){
@@ -30,9 +27,6 @@
     },
 
     rightLeg = function (ctx,legPosition) {
-        if(legPosition==null){
-            legPosition=0
-        }
         //right Leg
         legPosition=legPosition*-10;
         if(legPosition>0){

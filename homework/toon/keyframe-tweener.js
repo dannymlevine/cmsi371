@@ -92,22 +92,33 @@
                                 syDistance = (endKeyframe.sy || 1) - syStart,
 
                                 leftLeg = startKeyframe.leftLegPosition || 0,
-                                leftLegDistance = (endKeyframe.leftLeg || 0) - leftLeg,
+                                leftLegDistance = (endKeyframe.leftLegPosition || 0) - leftLeg,
 
                                 rightLeg = startKeyframe.rightLegPosition || 0,
-                                rightLegDistance = (endKeyframe.rightLeg || 0) - rightLeg,
+                                rightLegDistance = (endKeyframe.rightLegPosition || 0) - rightLeg,
 
                                 hand = startKeyframe.handPosition || 0,
-                                handDistance = (endKeyframe.hand || 0) - hand,
+                                handDistance = (endKeyframe.handPosition || 0) - hand,
 
-                                land = startKeyframe.landPosition || 0,
-                                landDistance = (endKeyframe.land || 0) - land,
+                                land = startKeyframe.landing || 0,
+                                landDistance = (endKeyframe.landing || 0) - land,
+                                
 
                                 rotateStart = (startKeyframe.rotate || 0) * Math.PI / 180,
                                 rotateDistance = (endKeyframe.rotate || 0) * Math.PI / 180 - rotateStart;
+                                
 
                             var currentTweenFrame = currentFrame - startKeyframe.frame,
                                 duration = endKeyframe.frame - startKeyframe.frame + 1;
+
+                                console.log("land: " + land);
+                                console.log("landDistance: " + landDistance);
+                                console.log("duration: " + duration);
+                                //console.log("Ease: " + ease(currentTweenFrame, land, landDistance, duration));
+                                var leftLegEase = ease(currentTweenFrame, leftLeg , leftLegDistance, duration);
+                                var rightLegEase = ease(currentTweenFrame, rightLeg, rightLegDistance, duration);
+                                var handEase = ease(currentTweenFrame, hand, handDistance, duration);
+                                var landEase = ease(currentTweenFrame, land, landDistance, duration);
 
                             // Build our transform according to where we should be.
                             renderingContext.translate(
@@ -123,8 +134,9 @@
                             );
 
                             // Draw the sprite.
+                            console.log(sprites[i]);
                             console.log(land,landDistance,duration)
-                            sprites[i].draw(renderingContext,(land||leftLeg|| hand),rightLeg);
+                            sprites[i].draw(renderingContext,(leftLegEase||landEase|| handEase),rightLegEase);
                             // {
                             //     leftLegPosition: Math.floor(ease(currentTweenFrame,leftLeg,leftLegDistance,duration))
                             // }
