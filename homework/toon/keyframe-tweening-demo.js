@@ -30,103 +30,208 @@
                 draw: LevineSprites.drawBender ,
                 keyframes: [
                     {
-                        frame: 0,
-                        tx: 1000,
-                        ty: 300,
-                        sx: .5,
-                        sy: .5,
+                        frame: 150,
+                        tx: 950,
+                        ty: 800,
                         leftLegPosition: 0,
                         rightLegPosition: 1,
                         ease: KeyframeTweener.linear
                     },
 
                     {
-                        frame: 20,
+                        frame: 170,
                         tx: 900,
-                        ty: 300,
-                        sx: .5,
-                        sy: .5,
+                        ty: 800,
                         leftLegPosition: 1,
                         rightLegPosition: 0,
                         ease: KeyframeTweener.linear
                     },
 
                     {
-                        frame: 40,
+                        frame: 190,
                         tx: 850,
-                        ty: 300,
-                        sx: .5,
-                        sy: .5,
+                        ty: 800,
                         leftLegPosition: 0,
                         rightLegPosition: 1,
                         ease: KeyframeTweener.linear
                     },
 
                     {
-                        frame: 60,
+                        frame: 210,
                         tx: 800,
-                        ty: 300,
-                        sx: .5,
-                        sy: .5,
+                        ty: 800,
                         leftLegPosition: 1,
                         rightLegPosition: 0,
                         ease: KeyframeTweener.linear
                     },
 
                     {
-                        frame: 80,
+                        frame: 230,
                         tx: 750,
-                        ty: 300,
-                        sx: .5,
-                        sy: .5,
+                        ty: 600,
+                        sx: .3,
+                        sy: .3,
                         leftLegPosition: 0,
                         rightLegPosition: 1,
                         ease: KeyframeTweener.linear
                     },
 
                     {
-                        frame: 100,
-                        tx: 700,
-                        ty: 300,
-                        sx: .5,
-                        sy: .5,
+                        frame: 235,
+                        tx: 730,
+                        ty: 600,
+                        sx: .3,
+                        sy: .3,
+                        leftLegPosition: 1,
+                        rightLegPosition: 0,
+                        ease: KeyframeTweener.linear
+                    }
+                ]
+
+            },
+
+                        {
+                draw: LevineSprites.drawBender ,
+                keyframes: [
+                    {
+                        frame: 240,
+                        tx: 950,
+                        ty: 600,
+                        sx: 2,
+                        sy: 2,
+                        leftLegPosition: 0,
+                        rightLegPosition: 1,
+                        ease: KeyframeTweener.linear
+                    },
+
+                    {
+                        frame: 260,
+                        tx: 850,
+                        ty: 600,
+                        sx: 2,
+                        sy: 2,
                         leftLegPosition: 1,
                         rightLegPosition: 0,
                         ease: KeyframeTweener.linear
                     },
 
                     {
-                        frame: 120,
-                        tx: 650,
-                        ty: 280,
-                        sx: .5,
-                        sy: .5,
+                        frame: 280,
+                        tx: 750,
+                        ty: 600,
+                        sx: 2,
+                        sy: 2,
                         leftLegPosition: 0,
                         rightLegPosition: 1,
                         ease: KeyframeTweener.linear
                     },
 
                     {
-                        frame: 140,
-                        tx: 600,
-                        ty: 200,
-                        sx: .5,
-                        sy: .5,
+                        frame: 300,
+                        tx: 650,
+                        ty: 600,
+                        sx: 2,
+                        sy: 2,
+                        leftLegPosition: 1,
+                        rightLegPosition: 0,
+                        ease: KeyframeTweener.linear
+                    },
+
+                    {
+                        frame: 320,
+                        tx: 550,
+                        ty: 600,
+                        sx: 2,
+                        sy: 2,
+                        leftLegPosition: 0,
+                        rightLegPosition: 1,
+                        ease: KeyframeTweener.linear
+                    },
+
+                    {
+                        frame: 340,
+                        tx: 450,
+                        ty: 600,
+                        sx: 2,
+                        sy: 2,
+                        leftLegPosition: 1,
+                        rightLegPosition: 0,
+                        ease: KeyframeTweener.linear
+                    },
+
+                    {
+                        frame: 350,
+                        tx: 300,
+                        ty: 600,
+                        sx: 2,
+                        sy: 2,
+                        leftLegPosition: 0,
+                        rightLegPosition: 1,
+                        ease: KeyframeTweener.linear
+                    }
+
+                ]
+                
+            },
+
+                                    {
+                draw: LevineSprites.drawBender ,
+                keyframes: [
+                    {
+                        frame: 360,
+                        tx: 800,
+                        ty: 690,
+                        sx:.4,
+                        sy:.4,
+                        leftLegPosition: 0,
+                        rightLegPosition: 1,
+                        ease: KeyframeTweener.linear
+                    },
+
+                    {
+                        frame: 380,
+                        tx: 700,
+                        ty: 690,
+                        sx:.4,
+                        sy:.4,
+                        leftLegPosition: 1,
+                        rightLegPosition: 0,
+                        ease: KeyframeTweener.linear
+                    },
+
+                    {
+                        frame: 400,
+                        tx: 650,
+                        ty: 630,
+                        sx:.4,
+                        sy:.4,
+                        leftLegPosition: 0,
+                        rightLegPosition: 1,
+                        ease: KeyframeTweener.linear
+                    },
+
+                    {
+                        frame: 410,
+                        tx: 630,
+                        ty: 620,
+                        sx:.4,
+                        sy:.4,
                         leftLegPosition: 1,
                         rightLegPosition: 0,
                         ease: KeyframeTweener.linear
                     }
 
                 ]
+                
             },
 
             {
                 draw: LevineSprites.drawSpaceship,
                 keyframes:[
                     {
-                        frame: 0,
+                        frame: 360,
                         tx: 500,
-                        ty: 200,
+                        ty: 550,
                         sx: 3,
                         sy: 3,
                         landing: 1,
@@ -134,33 +239,50 @@
                     },
 
                     {
-                        frame: 50,
+                        frame: 415,
                         tx: 500,
-                        ty: 200,
+                        ty: 550,
                         sx: 3,
                         sy: 3,
-                        landing: 0,
+                        landing: 1,
                         ease: KeyframeTweener.linear
                     },
 
                     {
-                        frame: 500,
-                        tx: 800,
+                        frame: 430,
+                        tx: 500,
+                        ty: 550,
+                        sx: 3,
+                        sy: 3,
+                        landing: 0,
+                        rotate:-40,
+                        ease: KeyframeTweener.linear
+                    },
+
+                    {
+                        frame: 450,
+                        tx: 600,
                         ty: -100,
                         sx: 3,
                         sy: 3,
                         landing: 0,
+                        rotate:-40,
                         ease: KeyframeTweener.linear
-                    }
+                    },
 
                     // {
-                    //     frame: 150,
-                    //     tx: 800,
-                    //     ty: 600,
-                    //     landing: 1,
+                    //     frame: 430,
+                    //     tx: 500,
+                    //     ty: 550,
+                    //     sx: 3,
+                    //     sy: 3,
+                    //     landing: 0,
+                    //     rotate:-40,
                     //     ease: KeyframeTweener.linear
-                    // }
-                ]
+                    // },
+
+                   
+               ]
 
             },
 

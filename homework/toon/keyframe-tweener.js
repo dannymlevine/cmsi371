@@ -111,9 +111,6 @@
                             var currentTweenFrame = currentFrame - startKeyframe.frame,
                                 duration = endKeyframe.frame - startKeyframe.frame + 1;
 
-                                console.log("land: " + land);
-                                console.log("landDistance: " + landDistance);
-                                console.log("duration: " + duration);
                                 //console.log("Ease: " + ease(currentTweenFrame, land, landDistance, duration));
                                 var leftLegEase = ease(currentTweenFrame, leftLeg , leftLegDistance, duration);
                                 var rightLegEase = ease(currentTweenFrame, rightLeg, rightLegDistance, duration);
@@ -134,12 +131,7 @@
                             );
 
                             // Draw the sprite.
-                            console.log(sprites[i]);
-                            console.log(land,landDistance,duration)
                             sprites[i].draw(renderingContext,(leftLegEase||landEase|| handEase),rightLegEase);
-                            // {
-                            //     leftLegPosition: Math.floor(ease(currentTweenFrame,leftLeg,leftLegDistance,duration))
-                            // }
                             // Clean up.
                             renderingContext.restore();
                         }
