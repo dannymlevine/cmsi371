@@ -1,8 +1,7 @@
 /*
  * A simple keyframe-tweening animation module for 2D
  * canvas elements.
- */
-(function () {
+ */ (function () {
     // The big one: animation initialization.  The settings parameter
     // is expected to be a JavaScript object with the following
     // properties:
@@ -66,8 +65,7 @@
                     for (var j = 0, maxJ = sprites[i].keyframes.length - 1; j < maxJ; j += 1) {
                         // We look for keyframe pairs such that the current
                         // frame is between their frame numbers.
-                        if ((sprites[i].keyframes[j].frame <= currentFrame) &&
-                                (currentFrame <= sprites[i].keyframes[j + 1].frame)) {
+                        if ((sprites[i].keyframes[j].frame <= currentFrame) && (currentFrame <= sprites[i].keyframes[j + 1].frame)) {
                             // Point to the start and end keyframes.
                             var startKeyframe = sprites[i].keyframes[j],
                                 endKeyframe = sprites[i].keyframes[j + 1];
@@ -102,36 +100,33 @@
 
                                 land = startKeyframe.landing || 0,
                                 landDistance = (endKeyframe.landing || 0) - land,
-                                
+
 
                                 rotateStart = (startKeyframe.rotate || 0) * Math.PI / 180,
                                 rotateDistance = (endKeyframe.rotate || 0) * Math.PI / 180 - rotateStart;
-                                
+
 
                             var currentTweenFrame = currentFrame - startKeyframe.frame,
                                 duration = endKeyframe.frame - startKeyframe.frame + 1;
 
-                                //console.log("Ease: " + ease(currentTweenFrame, land, landDistance, duration));
-                                var leftLegEase = ease(currentTweenFrame, leftLeg , leftLegDistance, duration);
-                                var rightLegEase = ease(currentTweenFrame, rightLeg, rightLegDistance, duration);
-                                var handEase = ease(currentTweenFrame, hand, handDistance, duration);
-                                var landEase = ease(currentTweenFrame, land, landDistance, duration);
+                            //console.log("Ease: " + ease(currentTweenFrame, land, landDistance, duration));
+                            var leftLegEase = ease(currentTweenFrame, leftLeg, leftLegDistance, duration);
+                            var rightLegEase = ease(currentTweenFrame, rightLeg, rightLegDistance, duration);
+                            var handEase = ease(currentTweenFrame, hand, handDistance, duration);
+                            var landEase = ease(currentTweenFrame, land, landDistance, duration);
 
                             // Build our transform according to where we should be.
                             renderingContext.translate(
-                                ease(currentTweenFrame, txStart, txDistance, duration),
-                                ease(currentTweenFrame, tyStart, tyDistance, duration)
-                            );
+                            ease(currentTweenFrame, txStart, txDistance, duration),
+                            ease(currentTweenFrame, tyStart, tyDistance, duration));
                             renderingContext.scale(
-                                ease(currentTweenFrame, sxStart, sxDistance, duration),
-                                ease(currentTweenFrame, syStart, syDistance, duration)
-                            );
+                            ease(currentTweenFrame, sxStart, sxDistance, duration),
+                            ease(currentTweenFrame, syStart, syDistance, duration));
                             renderingContext.rotate(
-                                ease(currentTweenFrame, rotateStart, rotateDistance, duration)
-                            );
+                            ease(currentTweenFrame, rotateStart, rotateDistance, duration));
 
                             // Draw the sprite.
-                            sprites[i].draw(renderingContext,(leftLegEase||landEase|| handEase),rightLegEase);
+                            sprites[i].draw(renderingContext, (leftLegEase || landEase || handEase), rightLegEase);
                             // Clean up.
                             renderingContext.restore();
                         }
@@ -166,27 +161,25 @@
 
         quadEaseInAndOut: function (currentTime, start, distance, duration) {
             var percentComplete = currentTime / (duration / 2);
-            return (percentComplete < 1) ?
-                    (distance / 2) * percentComplete * percentComplete + start :
-                    (-distance / 2) * ((percentComplete - 1) * (percentComplete - 3) - 1) + start;
+            return (percentComplete < 1) ? (distance / 2) * percentComplete * percentComplete + start : (-distance / 2) * ((percentComplete - 1) * (percentComplete - 3) - 1) + start;
         },
 
-        elasticEaseIn: function(t, b, c, d) {
-            var ts=(t/=d)*t;
-            var tc=ts*t;
-            return b+c*(54.595*tc*ts + -116.29*ts*ts + 84.295*tc + -24.1*ts + 2.5*t);
+        elasticEaseIn: function (t, b, c, d) {
+            var ts = (t /= d) * t;
+            var tc = ts * t;
+            return b + c * (54.595 * tc * ts + -116.29 * ts * ts + 84.295 * tc + -24.1 * ts + 2.5 * t);
         },
 
-        inOutQuartic: function(t, b, c, d) {
-            var ts=(t/=d)*t;
-            var tc=ts*t;
-            return b+c*(6.1975*tc*ts + -15.04*ts*ts + 23.685*tc + -20.79*ts + 6.9475*t);
+        inOutQuartic: function (t, b, c, d) {
+            var ts = (t /= d) * t;
+            var tc = ts * t;
+            return b + c * (6.1975 * tc * ts + -15.04 * ts * ts + 23.685 * tc + -20.79 * ts + 6.9475 * t);
         },
 
-        elasticOut: function(t, b, c, d) {
-            var ts=(t/=d)*t;
-            var tc=ts*t;
-            return b+c*(47.3925*tc*ts + -149.18*ts*ts + 169.88*tc + -82.79*ts + 15.6975*t);
+        elasticOut: function (t, b, c, d) {
+            var ts = (t /= d) * t;
+            var tc = ts * t;
+            return b + c * (47.3925 * tc * ts + -149.18 * ts * ts + 169.88 * tc + -82.79 * ts + 15.6975 * t);
         },
 
         initialize: initializeAnimation

@@ -26,27 +26,15 @@
         ctx.lineTo(18, 65);
         ctx.lineTo(18, 0);
         ctx.quadraticCurveTo(28, -20, 13, -60);
-    }, 
-    // JD: 1
-    rightHand = function (ctx,handPosition) {
-        handPosition=handPosition*13
+    },
+
+    rightHand = function (ctx, handPosition) {
+        handPosition = handPosition * 13;
         ctx.moveTo(13, -60);
         ctx.lineTo(53, -50);
         ctx.lineTo(57 + handPosition, -80);
         ctx.quadraticCurveTo(65 + handPosition, -110, 45 + handPosition, -85);
-        ctx.quadraticCurveTo(35 + handPosition, -95, 45+ handPosition, -75);
-        ctx.lineTo(45, -60);
-        ctx.lineTo(6, -70);
-        ctx.fill();
-        ctx.stroke();
-    },
-
-    rightHand2 = function (ctx) { // JD: 2
-        ctx.moveTo(13, -60);
-        ctx.lineTo(53, -50);
-        ctx.lineTo(80, -80);
-        ctx.quadraticCurveTo(88, -110, 68, -85);
-        ctx.quadraticCurveTo(58, -95, 68, -75);
+        ctx.quadraticCurveTo(35 + handPosition, -95, 45 + handPosition, -75);
         ctx.lineTo(45, -60);
         ctx.lineTo(6, -70);
         ctx.fill();
@@ -99,4 +87,3 @@
         fillBody(ctx);
     };
 })();
-

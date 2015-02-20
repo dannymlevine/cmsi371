@@ -1,53 +1,52 @@
 (function () {
-    leftLeg = function (ctx,legPosition) {
+    leftLeg = function (ctx, legPosition) {
         ctx.fillStyle = "#BCC6CC";
-        
         //left leg
-        legPosition=legPosition*-10;
-        if(legPosition>0){
-            ctx.fillRect(-33,-30-legPosition,15,legPosition);
-            ctx.strokeRect(-33,-30-legPosition,15,legPosition);
+        legPosition = legPosition * -10;
+        if (legPosition > 0) {
+            ctx.fillRect(-33, -30 - legPosition, 15, legPosition);
+            ctx.strokeRect(-33, -30 - legPosition, 15, legPosition);
         }
-        ctx.fillRect(-33, -30+legPosition, 15, 5);
-        ctx.fillRect(-33, -45+legPosition, 15, 20);
-        ctx.fillRect(-33, -55+legPosition, 15, 20);
-        ctx.strokeRect(-33, -30+legPosition, 15, 5);
-        ctx.strokeRect(-33, -45+legPosition, 15, 20);
-        ctx.strokeRect(-33, -55+legPosition, 15, 20);
+        ctx.fillRect(-33, -30 + legPosition, 15, 5);
+        ctx.fillRect(-33, -45 + legPosition, 15, 20);
+        ctx.fillRect(-33, -55 + legPosition, 15, 20);
+        ctx.strokeRect(-33, -30 + legPosition, 15, 5);
+        ctx.strokeRect(-33, -45 + legPosition, 15, 20);
+        ctx.strokeRect(-33, -55 + legPosition, 15, 20);
 
 
         //left foot
         ctx.beginPath();
-        ctx.moveTo(-33, -25+legPosition);
-        ctx.lineTo(-36, -20+legPosition);
-        ctx.lineTo(-14, -20+legPosition);
-        ctx.lineTo(-17, -25+legPosition);
+        ctx.moveTo(-33, -25 + legPosition);
+        ctx.lineTo(-36, -20 + legPosition);
+        ctx.lineTo(-14, -20 + legPosition);
+        ctx.lineTo(-17, -25 + legPosition);
         ctx.closePath();
         ctx.fill();
         ctx.stroke();
     },
 
-    rightLeg = function (ctx,legPosition) {
+    rightLeg = function (ctx, legPosition) {
         //right Leg
-        legPosition=legPosition*-10;
-        if(legPosition>0){
-            ctx.fillRect(-2,-30-legPosition,15,legPosition);
-            ctx.strokeRect(-2,-30-legPosition,15,legPosition);
+        legPosition = legPosition * -10;
+        if (legPosition > 0) {
+            ctx.fillRect(-2, -30 - legPosition, 15, legPosition);
+            ctx.strokeRect(-2, -30 - legPosition, 15, legPosition);
         }
-        ctx.fillRect(-2, -30+legPosition, 15, 5);
-        ctx.fillRect(-2, -45+legPosition, 15, 20);
-        ctx.fillRect(-2, -55+legPosition, 15, 20);
-        ctx.strokeRect(-2, -30+legPosition, 15, 5);
-        ctx.strokeRect(-2, -45+legPosition, 15, 20);
-        ctx.strokeRect(-2, -55+legPosition, 15, 20);
+        ctx.fillRect(-2, -30 + legPosition, 15, 5);
+        ctx.fillRect(-2, -45 + legPosition, 15, 20);
+        ctx.fillRect(-2, -55 + legPosition, 15, 20);
+        ctx.strokeRect(-2, -30 + legPosition, 15, 5);
+        ctx.strokeRect(-2, -45 + legPosition, 15, 20);
+        ctx.strokeRect(-2, -55 + legPosition, 15, 20);
 
 
         //right foot
         ctx.beginPath();
-        ctx.moveTo(-2, -25+legPosition);
-        ctx.lineTo(-5, -20+legPosition);
-        ctx.lineTo(17, -20+legPosition);
-        ctx.lineTo(14, -25+legPosition);
+        ctx.moveTo(-2, -25 + legPosition);
+        ctx.lineTo(-5, -20 + legPosition);
+        ctx.lineTo(17, -20 + legPosition);
+        ctx.lineTo(14, -25 + legPosition);
         ctx.closePath();
         ctx.fill();
         ctx.stroke();
@@ -215,14 +214,14 @@
     if (!window.LevineSprites) {
         window.LevineSprites = {};
     }
-    window.LevineSprites.drawBender = function (ctx, leftLegPosition,rightLegPosition) { // JD: 3
+    window.LevineSprites.drawBender = function (ctx, leftLegPosition, rightLegPosition) { // JD: 3
         // JD: 4
-        leftLeg(ctx,leftLegPosition)
-        rightLeg(ctx,rightLegPosition)
+        leftLeg(ctx, leftLegPosition);
+        rightLeg(ctx, rightLegPosition);
         body(ctx);
         arms(ctx);
         head(ctx); // JD: 5, 6
         antennaUp(ctx);
         face(ctx);
-    }
+    };
 })();

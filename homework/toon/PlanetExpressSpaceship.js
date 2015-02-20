@@ -61,12 +61,12 @@
         ctx.stroke();
     },
 
-    landingGear = function (ctx,landing) {
+    landingGear = function (ctx, landing) {
         ctx.fillStyle = "#00FA9A";
         ctx.moveTo(40, 20 * landing);
         ctx.lineTo(62, 40 * landing);
         ctx.lineTo(70, 40 * landing);
-        ctx.lineTo(43, 15 *landing);
+        ctx.lineTo(43, 15 * landing);
         ctx.fill();
         ctx.stroke();
     },
@@ -133,17 +133,17 @@
     if (!window.LevineSprites) {
         window.LevineSprites = {};
     }
-    window.LevineSprites.drawSpaceship = function (ctx,landing) { // JD: 3
+    window.LevineSprites.drawSpaceship = function (ctx, landing) { // JD: 3
         topHull(ctx);
         engine(ctx);
         windshield(ctx);
         windows(ctx);
         wing(ctx);
         lowerHull(ctx);
-        landingGear(ctx,landing);
+        landingGear(ctx, landing);
         if (landing === 0) {
             flames(ctx);
         }
-            
+
     };
 })();
