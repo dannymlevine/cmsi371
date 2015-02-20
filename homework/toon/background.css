@@ -1,5 +1,5 @@
 body {
-	background-image: Futurama_title_screen.jpg;
+	background-image: url(Futurama_title_screen.jpg);
 	background-size: 100%;
 	background-repeat: no-repeat;
 	background-position: center 0;

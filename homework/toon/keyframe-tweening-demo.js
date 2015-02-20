@@ -174,7 +174,7 @@
                 
             },
 
-                                    {
+            {
                 draw: LevineSprites.drawBender ,
                 keyframes: [
                     {
@@ -256,100 +256,530 @@
                         sy: 3,
                         landing: 0,
                         rotate:-40,
-                        ease: KeyframeTweener.linear
+                        ease: KeyframeTweener.elasticEaseIn
                     },
 
                     {
                         frame: 450,
                         tx: 600,
-                        ty: -100,
+                        ty: -200,
                         sx: 3,
                         sy: 3,
                         landing: 0,
                         rotate:-40,
-                        ease: KeyframeTweener.linear
+                        ease: KeyframeTweener.quadEaseInAndOut
                     },
 
-                    // {
-                    //     frame: 430,
-                    //     tx: 500,
-                    //     ty: 550,
-                    //     sx: 3,
-                    //     sy: 3,
-                    //     landing: 0,
-                    //     rotate:-40,
-                    //     ease: KeyframeTweener.linear
-                    // },
+               ]
+
+            },
+
+            {
+                draw: LevineSprites.drawSpaceship,
+                keyframes:[
+                    {
+                        frame: 475,
+                        tx: 0,
+                        ty: 300,
+                        landing: 0,
+                        ease: KeyframeTweener.elasticOut
+                    },
+
+                    {
+                        frame: 500,
+                        tx: 600,
+                        ty: 150,
+                        landing: 0,
+                        ease: KeyframeTweener.elasticOut
+                    },
+
+                    {
+                        frame: 530,
+                        tx: 1200,
+                        ty: 400,
+                        landing: 0,
+                        ease: KeyframeTweener.elasticEaseIn
+                    },
+
 
                    
                ]
 
             },
 
-            // {
-            //     draw: LevineSprites.drawMeeseeks,
-            //     keyframes:[
-            //         {
-            //             frame: 40,
-            //             tx: 400,
-            //             ty: 200,
-            //             handPosition: 0
-            //         },
+            {
+                draw: LevineSprites.drawSpaceship,
+                keyframes:[
+                    {
+                        frame: 600,
+                        tx: 0,
+                        ty: 600,
+                        landing: 0,
+                    },
 
-            //         {
-            //             frame: 70,
-            //             tx: 400,
-            //             ty: 200,
-            //             handPosition: 2
-            //         },
+                    {
+                        frame: 630,
+                        tx: 200,
+                        ty: 400,
+                        sx: .5,
+                        sy: .5,
+                        landing: 0,
 
-            //         {
-            //             frame: 100,
-            //             tx: 400,
-            //             ty: 200,
-            //             handPosition: 0
-            //         },
+                    },
 
-            //         {
-            //             frame: 120,
-            //             tx: 400,
-            //             ty: 200,
-            //             handPosition: 1
-            //         }
-            //     ]
+                    {
+                        frame: 650,
+                        tx: 480,
+                        ty: 240,
+                        sx: .2,
+                        sy: .2,
+                        landing: 0,
 
-            // },
+                    },
+
+                    {
+                        frame: 670,
+                        tx: 480,
+                        ty: 240,
+                        sx: .1,
+                        sy: .1,
+                        landing: 0,
+
+                    },
+                   
+               ]
+
+            },
 
             {
-                draw: circle,
+                draw: LevineSprites.drawBender ,
                 keyframes: [
                     {
-                        frame: 50,
-                        tx: 300,
-                        ty: 600,
-                        sx: 0.5,
-                        sy: 0.5,
-                        ease: KeyframeTweener.quadEaseOut
+                        frame: 730,
+                        tx: 150,
+                        ty: 550,
+                        leftLegPosition: 0,
+                        rightLegPosition: 1,
+                        ease: KeyframeTweener.linear
                     },
 
                     {
-                        frame: 100,
-                        tx: 300,
-                        ty: 0,
-                        sx: 3,
-                        sy: 0.25,
-                        ease: KeyframeTweener.quadEaseOut
+                        frame: 780,
+                        tx: 200,
+                        ty: 600,
+                        leftLegPosition: 1,
+                        rightLegPosition: 0,
+                        ease: KeyframeTweener.linear
                     },
 
                     {
-                        frame: 150,
+                        frame: 810,
                         tx: 300,
+                        ty: 650,
+                        leftLegPosition: 0,
+                        rightLegPosition: 1,
+                        ease: KeyframeTweener.linear
+                    },
+
+                    {
+                        frame: 830,
+                        tx: 400,
+                        ty: 720,
+                        leftLegPosition: 1,
+                        rightLegPosition: 0,
+                        ease: KeyframeTweener.linear
+                    },
+
+                    {
+                        frame: 860,
+                        tx: 500,
+                        ty: 740,
+                        leftLegPosition: 0,
+                        rightLegPosition: 1,
+                        ease: KeyframeTweener.linear
+                    },
+
+                    {
+                        frame: 890,
+                        tx: 600,
+                        ty: 740,
+                        leftLegPosition: 1,
+                        rightLegPosition: 0,
+                        ease: KeyframeTweener.linear
+                    },
+
+                    {
+                        frame: 910,
+                        tx: 700,
+                        ty: 740,
+                        leftLegPosition: 0,
+                        rightLegPosition: 1,
+                        ease: KeyframeTweener.linear
+                    },
+
+                    {
+                        frame: 930,
+                        tx: 800,
+                        ty: 740,
+                        leftLegPosition: 1,
+                        rightLegPosition: 0,
+                        ease: KeyframeTweener.linear
+                    },
+
+                    {
+                        frame: 940,
+                        tx: 800,
+                        ty: 740,
+                        leftLegPosition: 1,
+                        rightLegPosition: 1,
+                        ease: KeyframeTweener.linear
+                    },
+
+                    {
+                        frame: 970,
+                        tx: 800,
+                        ty: 740,
+                        leftLegPosition: 1,
+                        rightLegPosition: 1,
+                        ease: KeyframeTweener.linear
+                    },
+
+                    {
+                        frame: 980,
+                        tx: 600,
+                        ty: 740,
+                        leftLegPosition: 0,
+                        rightLegPosition: 1,
+                        ease: KeyframeTweener.linear
+                    },
+
+                    {
+                        frame: 990,
+                        tx: 600,
+                        ty: 740,
+                        leftLegPosition: 1,
+                        rightLegPosition: 0,
+                        ease: KeyframeTweener.linear
+                    },
+
+                    {
+                        frame: 1000,
+                        tx: 300,
+                        ty: 650,
+                        leftLegPosition: 0,
+                        rightLegPosition: 1,
+                        ease: KeyframeTweener.linear
+                    },
+
+                    {
+                        frame: 1010,
+                        tx: 200,
                         ty: 600,
-                        sx: 0.5,
-                        sy: 0.5
+                        leftLegPosition: 1,
+                        rightLegPosition: 0,
+                        ease: KeyframeTweener.linear
+                    },
+
+
+
+                ]
+
+            },
+
+            {
+                draw: LevineSprites.drawSpaceship,
+                keyframes:[
+                    {
+                        frame: 715,
+                        tx: 0,
+                        ty: 500,
+                        sx: 5,
+                        sy: 5,
+                        landing: 1,
+                    },
+
+                    {
+                        frame: 1020,
+                        tx: 0,
+                        ty: 500,
+                        sx: 5,
+                        sy: 5,
+                        landing: 1,
+                    },
+
+                    {
+                        frame: 1030,
+                        tx: 0,
+                        ty: 500,
+                        sx: 5,
+                        sy: 5,
+                        landing: 0,
+                    },
+
+                    {
+                        frame: 1040,
+                        tx: 0,
+                        ty: 500,
+                        sx: 5,
+                        sy: 5,
+                        landing: 0,
+                        rotate:-40,
+                        ease: KeyframeTweener.elasticEaseIn
+                    },
+
+                    {
+                        frame: 1050,
+                        tx: 600,
+                        ty: -600,
+                        sx: 5,
+                        sy: 5,
+                        landing: 0,
+                        rotate:-40,
+                        ease: KeyframeTweener.quadEaseInAndOut
+                    }, 
+
+                    {
+                        frame: 1120,
+                        tx: 600,
+                        ty: -600,
+                        sx: 5,
+                        sy: 5,
+                        landing: 0,
+                        rotate:-40,
+                        ease: KeyframeTweener.quadEaseInAndOut
+                    },                   
+                   
+               ]
+
+            },
+
+            {
+                draw: LevineSprites.drawMeeseeks,
+                keyframes:[
+                    {
+                        frame: 940,
+                        tx: 900,
+                        ty: 690,
+                        handPosition: 0
+                    },
+
+                    {
+                        frame: 950,
+                        tx: 900,
+                        ty: 690,
+                        handPosition: 1
+                    },
+
+                    {
+                        frame: 960,
+                        tx: 900,
+                        ty: 690,
+                        handPosition: 0
+                    },
+
+                    {
+                        frame: 970,
+                        tx: 900,
+                        ty: 690,
+                        handPosition: 1
+                    },
+
+                    {
+                        frame: 980,
+                        tx: 900,
+                        ty: 690,
+                        handPosition: 0
+                    },
+
+                    {
+                        frame: 990,
+                        tx: 900,
+                        ty: 690,
+                        handPosition: 1
+                    },
+
+                    {
+                        frame: 1000,
+                        tx: 900,
+                        ty: 690,
+                        handPosition: 0
+                    },
+
+                    {
+                        frame: 1010,
+                        tx: 900,
+                        ty: 690,
+                        handPosition: 1
+                    },
+
+                    {
+                        frame: 1020,
+                        tx: 900,
+                        ty: 690,
+                        handPosition: 0
+                    },
+
+                    {
+                        frame: 1030,
+                        tx: 900,
+                        ty: 690,
+                        handPosition: 1
+                    }
+
+                ]
+
+            },
+
+            {
+            draw: LevineSprites.drawMeeseeks,
+                keyframes:[
+                    {
+                        frame: 940,
+                        tx: 930,
+                        ty: 700,
+                        handPosition: 0
+                    },
+
+                    {
+                        frame: 950,
+                        tx: 930,
+                        ty: 700,
+                        handPosition: 1
+                    },
+
+                    {
+                        frame: 960,
+                        tx: 930,
+                        ty: 700,
+                        handPosition: 0
+                    },
+
+                    {
+                        frame: 970,
+                        tx: 930,
+                        ty: 700,
+                        handPosition: 1
+                    },
+
+                    {
+                        frame: 980,
+                        tx: 930,
+                        ty: 700,
+                        handPosition: 0
+                    },
+
+                    {
+                        frame: 990,
+                        tx: 930,
+                        ty: 700,
+                        handPosition: 1
+                    },
+
+                    {
+                        frame: 1000,
+                        tx: 930,
+                        ty: 700,
+                        handPosition: 0
+                    },
+
+                    {
+                        frame: 1010,
+                        tx: 930,
+                        ty: 700,
+                        handPosition: 1
+                    },
+
+                    {
+                        frame: 1020,
+                        tx: 930,
+                        ty: 700,
+                        handPosition: 0
+                    },
+
+                    {
+                        frame: 1030,
+                        tx: 930,
+                        ty: 700,
+                        handPosition: 1
+                    }
+
+                ]
+            },
+
+            {
+            draw: LevineSprites.drawMeeseeks,
+                keyframes:[
+                    {
+                        frame: 940,
+                        tx: 910,
+                        ty: 700,
+                        handPosition: 0
+                    },
+
+                    {
+                        frame: 950,
+                        tx: 910,
+                        ty: 700,
+                        handPosition: 1
+                    },
+
+                    {
+                        frame: 960,
+                        tx: 910,
+                        ty: 700,
+                        handPosition: 0
+                    },
+
+                    {
+                        frame: 970,
+                        tx: 910,
+                        ty: 700,
+                        handPosition: 1
+                    },
+
+                    {
+                        frame: 980,
+                        tx: 910,
+                        ty: 700,
+                        handPosition: 0
+                    },
+
+                    {
+                        frame: 990,
+                        tx: 910,
+                        ty: 700,
+                        handPosition: 1
+                    },
+
+                    {
+                        frame: 1000,
+                        tx: 910,
+                        ty: 700,
+                        handPosition: 0
+                    },
+
+                    {
+                        frame: 1010,
+                        tx: 910,
+                        ty: 700,
+                        handPosition: 1
+                    },
+
+                    {
+                        frame: 1020,
+                        tx: 910,
+                        ty: 700,
+                        handPosition: 0
+                    },
+
+                    {
+                        frame: 1030,
+                        tx: 910,
+                        ty: 700,
+                        handPosition: 1
                     }
                 ]
-            }
+            },
         ];
 
     // Finally, we initialize the engine.  Mainly, it needs

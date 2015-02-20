@@ -1,6 +1,6 @@
     //http://www.hotscripts.com/forums/javascript/59719-changing-images-body-background.html
     /* you must supply your own immages */
-    var bgimages=["planet express.jpeg","empty living room.jpeg","hangar.jpg","space.jpeg","planet.jpeg"];
+    var bgimages=["planet express.jpeg","empty living room.jpeg","hangar.jpg","space.jpeg","planet.jpeg","planet surface.jpeg"];
 
      
     //preload images
@@ -18,7 +18,7 @@
       if (inc<bgimages.length-1){
         inc++;
       }
-      document.body.background=pathToImg[inc].src
+      document.body.style.backgroundImage = "url('"+pathToImg[inc].src+"')"
 
     }
      

@@ -171,6 +171,24 @@
                     (-distance / 2) * ((percentComplete - 1) * (percentComplete - 3) - 1) + start;
         },
 
+        elasticEaseIn: function(t, b, c, d) {
+            var ts=(t/=d)*t;
+            var tc=ts*t;
+            return b+c*(54.595*tc*ts + -116.29*ts*ts + 84.295*tc + -24.1*ts + 2.5*t);
+        },
+
+        inOutQuartic: function(t, b, c, d) {
+            var ts=(t/=d)*t;
+            var tc=ts*t;
+            return b+c*(6.1975*tc*ts + -15.04*ts*ts + 23.685*tc + -20.79*ts + 6.9475*t);
+        },
+
+        elasticOut: function(t, b, c, d) {
+            var ts=(t/=d)*t;
+            var tc=ts*t;
+            return b+c*(47.3925*tc*ts + -149.18*ts*ts + 169.88*tc + -82.79*ts + 15.6975*t);
+        },
+
         initialize: initializeAnimation
     };
 }());
