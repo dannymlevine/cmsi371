@@ -51,14 +51,28 @@
     // (end of adapted code by Tyler Nichols)
 
     // Set a little event handler to apply the filter.
-    $("#apply-filter-button").click(function () {
+    $("#filter1").click(function () {
         // Filter time.
         renderingContext.putImageData(
             Nanoshop.applyFilter(
                 renderingContext.getImageData(0, 0, canvas.width, canvas.height),
                 // This is a basic "darkener."
                 function (x, y, r, g, b, a) {
-                    return [r / 2, g / 2, b / 2, a];
+                    return [Math.floor(r *2.3), Math.floor(g*2.3), Math.floor(b), a];
+                }
+            ),
+            0, 0
+        );
+    });
+
+    $("#blacklight").click(function () {
+        // Filter time.
+        renderingContext.putImageData(
+            Nanoshop.applyFilter(
+                renderingContext.getImageData(0, 0, canvas.width, canvas.height),
+                // This is a basic "darkener."
+                function (x, y, r, g, b, a) {
+                    return [r / 1.5, 0, b, a];
                 }
             ),
             0, 0
