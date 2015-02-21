@@ -51,14 +51,14 @@
     // (end of adapted code by Tyler Nichols)
 
     // Set a little event handler to apply the filter.
-    $("#filter1").click(function () {
+    $("#lowlight").click(function () {
         // Filter time.
         renderingContext.putImageData(
             Nanoshop.applyFilter(
                 renderingContext.getImageData(0, 0, canvas.width, canvas.height),
                 // This is a basic "darkener."
                 function (x, y, r, g, b, a) {
-                    return [Math.floor(r *2.3), Math.floor(g*2.3), Math.floor(b), a];
+                    return [r , g , b / 2, a];
                 }
             ),
             0, 0
