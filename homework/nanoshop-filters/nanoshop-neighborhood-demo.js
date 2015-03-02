@@ -82,14 +82,24 @@
     // (end of adapted code by Tyler Nichols)
 
     // Set a little event handler to apply the filter.
-    $("#apply-filter-button").click(function () {
+    $("#sunlight").click(function () {
         // Filter time.
         renderingContext.putImageData(
             NanoshopNeighborhood.applyFilter(
                 renderingContext,
                 renderingContext.getImageData(0, 0, canvas.width, canvas.height),
-                NanoshopNeighborhood.darkener
-                //NanoshopNeighborhood.averager // Convenience comment for easy switching.
+                NanoshopNeighborhood.sunlight
+            ),
+            0, 0
+        );
+    });
+        $("#underwater").click(function () {
+        // Filter time.
+        renderingContext.putImageData(
+            NanoshopNeighborhood.applyFilter(
+                renderingContext,
+                renderingContext.getImageData(0, 0, canvas.width, canvas.height),
+                NanoshopNeighborhood.underwater
             ),
             0, 0
         );
