@@ -1,12 +1,13 @@
 /*
  * This file demonstrates how our homebrew keyframe-tweening
  * engine is used.
- */ (function () {
+ */ (function () { // JD: 4
     var canvas = document.getElementById("canvas"),
 
         // First, a selection of "drawing functions" from which we
         // can choose.  Their common trait: they all accept a single
         // renderingContext argument.
+        // JD: 5
         square = function (renderingContext) {
             renderingContext.fillStyle = "blue";
             renderingContext.fillRect(-20, -20, 40, 40);
@@ -24,7 +25,7 @@
 
         // Now, to actually define the animated sprites.  Each sprite
         // has a drawing function and an array of keyframes.
-        sprites = [{
+        sprites = [{ // JD: 6
             draw: LevineSprites.drawBender,
             keyframes: [{
                 frame: 150,
@@ -538,7 +539,7 @@
                 ease: KeyframeTweener.quadEaseInAndOut
             }
 
-            ]
+            ] // JD: 7
 
         },
 
@@ -762,7 +763,7 @@
                 frame: 1030,
                 tx: 910,
                 ty: 700,
-                handPosition: 1
+                handPosition: 1 // JD: 8
             }]
         }];
 

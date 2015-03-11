@@ -1,4 +1,5 @@
 (function () {
+    // JD: 16
     var body = function (ctx) {
         ctx.beginPath();
         //left side
@@ -80,7 +81,7 @@
     if (!window.LevineSprites) {
         window.LevineSprites = {};
     }
-    window.LevineSprites.drawMeeseeks = function (ctx, handPosition) { // JD: 3
+    window.LevineSprites.drawMeeseeks = function (ctx, handPosition) { // JD: 12
         body(ctx);
         rightHand(ctx, handPosition);
         face(ctx);

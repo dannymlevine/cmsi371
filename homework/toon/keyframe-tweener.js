@@ -1,7 +1,7 @@
 /*
  * A simple keyframe-tweening animation module for 2D
  * canvas elements.
- */ (function () {
+ */ (function () { // JD: 4
     // The big one: animation initialization.  The settings parameter
     // is expected to be a JavaScript object with the following
     // properties:
@@ -89,6 +89,7 @@
                                 syStart = startKeyframe.sy || 1,
                                 syDistance = (endKeyframe.sy || 1) - syStart,
 
+                                // JD: 10
                                 leftLeg = startKeyframe.leftLegPosition || 0,
                                 leftLegDistance = (endKeyframe.leftLegPosition || 0) - leftLeg,
 
@@ -110,6 +111,8 @@
                                 duration = endKeyframe.frame - startKeyframe.frame + 1;
 
                             //console.log("Ease: " + ease(currentTweenFrame, land, landDistance, duration));
+     
+                            // JD: 10
                             var leftLegEase = ease(currentTweenFrame, leftLeg, leftLegDistance, duration);
                             var rightLegEase = ease(currentTweenFrame, rightLeg, rightLegDistance, duration);
                             var handEase = ease(currentTweenFrame, hand, handDistance, duration);
@@ -117,6 +120,7 @@
 
                             // Build our transform according to where we should be.
                             renderingContext.translate(
+                                // JD: 11
                             ease(currentTweenFrame, txStart, txDistance, duration),
                             ease(currentTweenFrame, tyStart, tyDistance, duration));
                             renderingContext.scale(
@@ -126,6 +130,7 @@
                             ease(currentTweenFrame, rotateStart, rotateDistance, duration));
 
                             // Draw the sprite.
+                            // JD: 12
                             sprites[i].draw(renderingContext, (leftLegEase || landEase || handEase), rightLegEase);
                             // Clean up.
                             renderingContext.restore();
@@ -164,6 +169,7 @@
             return (percentComplete < 1) ? (distance / 2) * percentComplete * percentComplete + start : (-distance / 2) * ((percentComplete - 1) * (percentComplete - 3) - 1) + start;
         },
 
+        // JD: Nicely chosen easing functions :)
         elasticEaseIn: function (t, b, c, d) {
             var ts = (t /= d) * t;
             var tc = ts * t;

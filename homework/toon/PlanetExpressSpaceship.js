@@ -1,4 +1,5 @@
 (function () {
+    // JD: 15
     topHull = function (ctx) {
         ctx.fillStyle = "#00FA9A";
         ctx.beginPath();
@@ -63,7 +64,7 @@
 
     landingGear = function (ctx, landing) {
         ctx.fillStyle = "#00FA9A";
-        ctx.moveTo(40, 20 * landing);
+        ctx.moveTo(40, 20 * landing); // JD: 14
         ctx.lineTo(62, 40 * landing);
         ctx.lineTo(70, 40 * landing);
         ctx.lineTo(43, 15 * landing);
@@ -133,7 +134,7 @@
     if (!window.LevineSprites) {
         window.LevineSprites = {};
     }
-    window.LevineSprites.drawSpaceship = function (ctx, landing) { // JD: 3
+    window.LevineSprites.drawSpaceship = function (ctx, landing) { // JD: 12
         topHull(ctx);
         engine(ctx);
         windshield(ctx);

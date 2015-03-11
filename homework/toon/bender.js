@@ -1,4 +1,5 @@
 (function () {
+    // JD: 15
     leftLeg = function (ctx, legPosition) {
         ctx.fillStyle = "#BCC6CC";
         //left leg
@@ -7,7 +8,7 @@
             ctx.fillRect(-33, -30 - legPosition, 15, legPosition);
             ctx.strokeRect(-33, -30 - legPosition, 15, legPosition);
         }
-        ctx.fillRect(-33, -30 + legPosition, 15, 5);
+        ctx.fillRect(-33, -30 + legPosition, 15, 5); // JD: 13
         ctx.fillRect(-33, -45 + legPosition, 15, 20);
         ctx.fillRect(-33, -55 + legPosition, 15, 20);
         ctx.strokeRect(-33, -30 + legPosition, 15, 5);
@@ -17,7 +18,7 @@
 
         //left foot
         ctx.beginPath();
-        ctx.moveTo(-33, -25 + legPosition);
+        ctx.moveTo(-33, -25 + legPosition); // JD: 13
         ctx.lineTo(-36, -20 + legPosition);
         ctx.lineTo(-14, -20 + legPosition);
         ctx.lineTo(-17, -25 + legPosition);
@@ -33,7 +34,7 @@
             ctx.fillRect(-2, -30 - legPosition, 15, legPosition);
             ctx.strokeRect(-2, -30 - legPosition, 15, legPosition);
         }
-        ctx.fillRect(-2, -30 + legPosition, 15, 5);
+        ctx.fillRect(-2, -30 + legPosition, 15, 5); // JD: 13
         ctx.fillRect(-2, -45 + legPosition, 15, 20);
         ctx.fillRect(-2, -55 + legPosition, 15, 20);
         ctx.strokeRect(-2, -30 + legPosition, 15, 5);
@@ -207,13 +208,12 @@
     if (!window.LevineSprites) {
         window.LevineSprites = {};
     }
-    window.LevineSprites.drawBender = function (ctx, leftLegPosition, rightLegPosition) { // JD: 3
-        // JD: 4
+    window.LevineSprites.drawBender = function (ctx, leftLegPosition, rightLegPosition) { // JD: 12
         leftLeg(ctx, leftLegPosition);
         rightLeg(ctx, rightLegPosition);
         body(ctx);
         arms(ctx);
-        head(ctx); // JD: 5, 6
+        head(ctx);
         antennaUp(ctx);
         face(ctx);
     };
