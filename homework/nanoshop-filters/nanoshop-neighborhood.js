@@ -6,8 +6,8 @@ var NanoshopNeighborhood = {
     /*
      * A basic "darkener"---this one does not even use the entire pixel neighborhood;
      * just the exact current pixel like the original Nanoshop.
-     */
-    sunlight: function (x, y, rgbaNeighborhood) {
+     */ // JD: 1
+    sunlight: function (x, y, rgbaNeighborhood) { // JD: 4
         return [
             rgbaNeighborhood[4].r * 2,
             rgbaNeighborhood[4].g * 2,
@@ -19,7 +19,7 @@ var NanoshopNeighborhood = {
     /*
      * A basic "averager"---this one returns the average of all the pixels in the
      * given neighborhood.
-     */
+     */ // JD: 1
     underwater: function (x, y, rgbaNeighborhood) {
         var rTotal = 0,
             gTotal = 0,

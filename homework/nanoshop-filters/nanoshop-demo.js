@@ -56,9 +56,9 @@
         renderingContext.putImageData(
             Nanoshop.applyFilter(
                 renderingContext.getImageData(0, 0, canvas.width, canvas.height),
-                // This is a basic "darkener."
-                function (x, y, r, g, b, a) {
-                    return [r , g , b / 2, a];
+                // This is a basic "darkener." // JD: 1
+                function (x, y, r, g, b, a) { // JD: 2
+                    return [r , g , b / 2, a]; // JD: 3
                 }
             ),
             0, 0
@@ -70,9 +70,9 @@
         renderingContext.putImageData(
             Nanoshop.applyFilter(
                 renderingContext.getImageData(0, 0, canvas.width, canvas.height),
-                // This is a basic "darkener."
-                function (x, y, r, g, b, a) {
-                    return [r / 1.5, 0, b, a];
+                // This is a basic "darkener." // JD: 1
+                function (x, y, r, g, b, a) { // JD: 2
+                    return [r / 1.5, 0, b, a]; // JD: 3
                 }
             ),
             0, 0

@@ -275,8 +275,8 @@ var Primitives = {
     plotCirclePoints: function (context, xc, yc, x, y, color1, color2) {
         color1 = color1 || [0, 0, 0];
         color2 = color2 || [0, 0, 0];
-        var radius= Math.sqrt(Math.pow(xc-x,2)+Math.pow(yc-y,2));
-        for(var i=0;i<radius;i++){
+        var radius= Math.sqrt(Math.pow(xc-x,2)+Math.pow(yc-y,2)); // JD: 5, 6
+        for(var i=0;i<radius;i++){ // JD: 7
             var x1= x*(i/radius);
             var y1= y*(i/radius);
             var color = [(1-(i/radius))*color1[0] + (i/radius)*color2[0], (1-(i/radius))*color1[1] + (i/radius)*color2[1], (1-(i/radius))*color1[2] + (i/radius)*color2[2]];
