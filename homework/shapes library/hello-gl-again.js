@@ -124,56 +124,60 @@
 
     // Build the objects to display.
     objectsToDraw = [
-        {
-            vertices: [].concat(
-                [ 0.0, 0.0, 0.0 ],
-                [ 0.5, 0.0, -0.75 ],
-                [ 0.0, 0.5, 0.0 ]
-            ),
-            colors: [].concat(
-                [ 1.0, 0.0, 0.0 ],
-                [ 0.0, 1.0, 0.0 ],
-                [ 0.0, 0.0, 1.0 ]
-            ),
-            mode: gl.TRIANGLES
-        },
+        // {
+        //     vertices: [].concat(
+        //         [ 0.0, 0.0, 0.0 ],
+        //         [ 0.5, 0.5, 0.0 ]
+        //     ),
+        //     colors: [].concat(
+        //         [ 1.0, 0.0, 0.0 ],
+        //         [ 0.0, 1.0, 0.0 ],
+        //         [ 0.0, 0.0, 1.0 ]
+        //     ),
+        //     mode: gl.LINE_LOOP
+        // },
 
-        {
-            color: { r: 0.0, g: 1.0, b: 0 },
-            vertices: [].concat(
-                [ 0.25, 0.0, -0.5 ],
-                [ 0.75, 0.0, -0.5 ],
-                [ 0.25, 0.5, -0.5 ]
-            ),
-            mode: gl.TRIANGLES
-        },
+        // {
+        //     color: { r: 0.0, g: 1.0, b: 0 },
+        //     vertices: [].concat(
+        //         [ 0.0, 0.0, 0.0 ],
+        //         [ 0.0, 0.5, 0.0 ],
+        //         [ 0.1, 0.45, 0.0 ]
+        //     ),
+        //     mode: gl.TRIANGLES
+        // },
 
-        {
-            color: { r: 0.0, g: 0.0, b: 1.0 },
-            vertices: [].concat(
-                [ -0.25, 0.0, 0.5 ],
-                [ 0.5, 0.0, 0.5 ],
-                [ -0.25, 0.5, 0.5 ]
-            ),
-            mode: gl.TRIANGLES
-        },
+        // {
+        //     color: { r: 0.0, g: 0.0, b: 1.0 },
+        //     vertices: [].concat(
+        //         [ -0.25, 0.0, 0.5 ],
+        //         [ 0.5, 0.0, 0.5 ],
+        //         [ -0.25, 0.5, 0.5 ]
+        //     ),
+        //     mode: gl.TRIANGLES
+        // },
 
+        // {
+        //     color: { r: 0.0, g: 0.0, b: 1.0 },
+        //     vertices: [].concat(
+        //         [ -1.0, -1.0, 0.75 ],
+        //         [ -1.0, -0.1, -1.0 ],
+        //         [ -0.1, -0.1, -1.0 ],
+        //         [ -0.1, -1.0, 0.75 ]
+        //     ),
+        //     mode: gl.LINE_LOOP
+        // },
         {
-            color: { r: 0.0, g: 0.0, b: 1.0 },
-            vertices: [].concat(
-                [ -1.0, -1.0, 0.75 ],
-                [ -1.0, -0.1, -1.0 ],
-                [ -0.1, -0.1, -1.0 ],
-                [ -0.1, -1.0, 0.75 ]
-            ),
-            mode: gl.LINE_LOOP
-        },
-
-        {
-            color: { r: 0.0, g: 0.5, b: 0.0 },
-            vertices: Shapes.toRawLineArray(Shapes.icosahedron()),
-            mode: gl.LINES
+            color: {r:0.0, g:0.5, b:0.0},
+            vertices: Shapes.drawCylinder(Shapes.cylinder()),
+            mode:gl.LINES
         }
+
+        // {
+        //     color: { r: 0.0, g: 0.5, b: 0.0 },
+        //     vertices: Shapes.toRawLineArray(Shapes.drawSphere(Shapes.sphere())),
+        //     mode: gl.LINES
+        // },
     ];
 
     // Pass the vertices to WebGL.
@@ -256,7 +260,7 @@
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
         // Set up the rotation matrix.
-        gl.uniformMatrix4fv(rotationMatrix, gl.FALSE, new Float32Array(getRotationMatrix(currentRotation, 0, 1, 0)));
+        gl.uniformMatrix4fv(rotationMatrix, gl.FALSE, new Float32Array(getRotationMatrix(currentRotation, 0.5, 1, 1)));
 
         // Display the objects.
         for (i = 0, maxi = objectsToDraw.length; i < maxi; i += 1) {
