@@ -9,14 +9,14 @@
     // are used.
     var gl, // The WebGL context.
 
-        // This variable stores 3D model information.
-        objectsToDraw,
+    // This variable stores 3D model information.
+    objectsToDraw,
 
-        // The shader program to use.
-        shaderProgram,
+    // The shader program to use.
+    shaderProgram,
 
-        // Utility variable indicating whether some fatal has occurred.
-        abort = false,
+    // Utility variable indicating whether some fatal has occurred.
+    abort = false,
 
         // Important state variables.
         animationActive = false,
@@ -84,26 +84,19 @@
 
             // GL expects its matrices in column major order.
             return [
-                (x2 * oneMinusC) + c,
-                (xy * oneMinusC) + zs,
-                (xz * oneMinusC) - ys,
-                0.0,
+            (x2 * oneMinusC) + c, (xy * oneMinusC) + zs, (xz * oneMinusC) - ys,
+            0.0,
 
-                (xy * oneMinusC) - zs,
-                (y2 * oneMinusC) + c,
-                (yz * oneMinusC) + xs,
-                0.0,
+            (xy * oneMinusC) - zs, (y2 * oneMinusC) + c, (yz * oneMinusC) + xs,
+            0.0,
 
-                (xz * oneMinusC) + ys,
-                (yz * oneMinusC) - xs,
-                (z2 * oneMinusC) + c,
-                0.0,
+            (xz * oneMinusC) + ys, (yz * oneMinusC) - xs, (z2 * oneMinusC) + c,
+            0.0,
 
-                0.0,
-                0.0,
-                0.0,
-                1.0
-            ];
+            0.0,
+            0.0,
+            0.0,
+            1.0];
         };
 
     // Grab the WebGL rendering context.
@@ -123,73 +116,85 @@
     gl.viewport(0, 0, canvas.width, canvas.height);
 
     // Build the objects to display.
-    objectsToDraw = [
-        // {
-        //     color: { r: 0.0, g: 1.0, b: 0 },
-        //     vertices:Shapes.toRawTriangleArray(Shapes.star()),
-        //     mode: gl.TRIANGLES
-        // },
-
-        {
-            color: { r: 0.0, g: 1.0, b: 0.0 },
-            vertices:Shapes.toRawTriangleArray(Shapes.doublePyramid()),
-            mode: gl.TRIANGLES
+    objectsToDraw = [{
+        color: {
+            r: 0.0,
+            g: 1.0,
+            b: 0.0
         },
+        vertices: Shapes.toRawTriangleArray(Shapes.doublePyramid()),
+        mode: gl.TRIANGLES
+    },
 
-        {
-            color: {r:0.0, g:0.0, b:1.0},
-            vertices: Shapes.drawCylinder(Shapes.cylinder()),
-            mode:gl.LINES
+    {
+        color: {
+            r: 0.0,
+            g: 0.0,
+            b: 1.0
         },
+        vertices: Shapes.drawCylinder(Shapes.cylinder()),
+        mode: gl.LINES
+    },
 
-        {
-            color: { r: 1.0, g: 0.0, b: 0.0 },
-            vertices: Shapes.drawSphere(Shapes.sphere()),
-            mode: gl.LINES
+    {
+        color: {
+            r: 0.0,
+            g: 0.0,
+            b: 1.0
         },
-    ];
+        vertices: Shapes.drawCone(Shapes.cone()),
+        mode: gl.LINES
+    },
+
+    {
+        color: {
+            r: 1.0,
+            g: 0.0,
+            b: 0.0
+        },
+        vertices: Shapes.drawSphere(Shapes.sphere()),
+        mode: gl.LINES
+    }];
 
     // Pass the vertices to WebGL.
     for (i = 0, maxi = objectsToDraw.length; i < maxi; i += 1) {
         objectsToDraw[i].buffer = GLSLUtilities.initVertexBuffer(gl,
-                objectsToDraw[i].vertices);
+        objectsToDraw[i].vertices);
 
         if (!objectsToDraw[i].colors) {
             // If we have a single color, we expand that into an array
             // of the same color over and over.
             objectsToDraw[i].colors = [];
             for (j = 0, maxj = objectsToDraw[i].vertices.length / 3;
-                    j < maxj; j += 1) {
+            j < maxj; j += 1) {
                 objectsToDraw[i].colors = objectsToDraw[i].colors.concat(
-                    objectsToDraw[i].color.r,
-                    objectsToDraw[i].color.g,
-                    objectsToDraw[i].color.b
-                );
+                objectsToDraw[i].color.r,
+                objectsToDraw[i].color.g,
+                objectsToDraw[i].color.b);
             }
         }
         objectsToDraw[i].colorBuffer = GLSLUtilities.initVertexBuffer(gl,
-                objectsToDraw[i].colors);
+        objectsToDraw[i].colors);
     }
 
     // Initialize the shaders.
     shaderProgram = GLSLUtilities.initSimpleShaderProgram(
-        gl,
-        $("#vertex-shader").text(),
-        $("#fragment-shader").text(),
+    gl,
+    $("#vertex-shader").text(),
+    $("#fragment-shader").text(),
 
-        // Very cursory error-checking here...
-        function (shader) {
-            abort = true;
-            alert("Shader problem: " + gl.getShaderInfoLog(shader));
-        },
+    // Very cursory error-checking here...
+    function (shader) {
+        abort = true;
+        alert("Shader problem: " + gl.getShaderInfoLog(shader));
+    },
 
-        // Another simplistic error check: we don't even access the faulty
-        // shader program.
-        function (shaderProgram) {
-            abort = true;
-            alert("Could not link shaders...sorry.");
-        }
-    );
+    // Another simplistic error check: we don't even access the faulty
+    // shader program.
+    function (shaderProgram) {
+        abort = true;
+        alert("Could not link shaders...sorry.");
+    });
 
     // If the abort variable is true here, we can't continue.
     if (abort) {
