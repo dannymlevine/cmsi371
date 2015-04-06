@@ -3,23 +3,24 @@
  * pixel-level image processing using a pixel's "neighborhood."
  */
 var NanoshopNeighborhood = {
-    /*
-     * A basic "darkener"---this one does not even use the entire pixel neighborhood;
-     * just the exact current pixel like the original Nanoshop.
-     */ // JD: 1
-    sunlight: function (x, y, rgbaNeighborhood) { // JD: 4
-        return [
-            rgbaNeighborhood[4].r * 2,
-            rgbaNeighborhood[4].g * 2,
-            rgbaNeighborhood[4].b / 2,
-            rgbaNeighborhood[4].a / 2 
-        ];
+
+    sunlight: function (x, y, rgbaNeighborhood) {
+        var rTotal = 0,
+            gTotal = 0,
+            bTotal = 0,
+            aTotal = 0,
+            i;
+
+        for (i = 0; i < 9; i += 3) {
+            rTotal += Math.cos(rgbaNeighborhood[i].r);
+            gTotal += rgbaNeighborhood[i].g;
+            bTotal += rgbaNeighborhood[i].b * 2;
+            aTotal += rgbaNeighborhood[i].a;
+        }
+
+        return [ rTotal, gTotal, bTotal, aTotal ];
     },
 
-    /*
-     * A basic "averager"---this one returns the average of all the pixels in the
-     * given neighborhood.
-     */ // JD: 1
     underwater: function (x, y, rgbaNeighborhood) {
         var rTotal = 0,
             gTotal = 0,
@@ -27,14 +28,14 @@ var NanoshopNeighborhood = {
             aTotal = 0,
             i;
 
-        for (i = 0; i < 9; i += 1) {
-            rTotal += rgbaNeighborhood[i].r;
-            gTotal += rgbaNeighborhood[i].g;
-            bTotal += rgbaNeighborhood[i].b;
-            aTotal += rgbaNeighborhood[i].a;
+        for (i = 0; i < 9; i += 2) {
+            rTotal += rgbaNeighborhood[i].r + 20;
+            gTotal += 40 - rgbaNeighborhood[i].g;
+            bTotal += rgbaNeighborhood[i].b / 10;
+            aTotal += rgbaNeighborhood[i].a * 3;
         }
 
-        return [ rTotal / 10, gTotal, bTotal / 6, aTotal / 10 ];
+        return [ rTotal, gTotal, bTotal, aTotal ];
     },
 
     /*

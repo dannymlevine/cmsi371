@@ -82,7 +82,7 @@
     // (end of adapted code by Tyler Nichols)
 
     // Set a little event handler to apply the filter.
-    $("#sunlight").click(function () {
+    $("#blue").click(function () {
         // Filter time.
         renderingContext.putImageData(
             NanoshopNeighborhood.applyFilter(
@@ -93,7 +93,7 @@
             0, 0
         );
     });
-        $("#underwater").click(function () {
+        $("#swapper").click(function () {
         // Filter time.
         renderingContext.putImageData(
             NanoshopNeighborhood.applyFilter(
