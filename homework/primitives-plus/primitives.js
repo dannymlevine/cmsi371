@@ -9,8 +9,7 @@ var Primitives = {
      */
     setPixel: function (context, x, y, r1, g1, b1) {
         context.save();
-        context.fillStyle = "rgb(" + parseInt(r1, 10) + "," +
-                parseInt(g1, 10) + "," + parseInt(b1, 10) + ")";
+        context.fillStyle = "rgb(" + parseInt(r1, 10) + "," + parseInt(g1, 10) + "," + parseInt(b1, 10) + ")";
         context.fillRect(x, y, 1, 1);
         context.restore();
     },
@@ -64,9 +63,9 @@ var Primitives = {
                 for (i = y; i < bottom; i += 1) {
                     for (j = x; j < right; j += 1) {
                         module.setPixel(context, j, i,
-                                leftColor[0],
-                                leftColor[1],
-                                leftColor[2]);
+                        leftColor[0],
+                        leftColor[1],
+                        leftColor[2]);
                     }
 
                     // Move to the next level of the gradient.
@@ -80,15 +79,13 @@ var Primitives = {
                 for (i = y; i < bottom; i += 1) {
                     // Move to the next "vertical" color level.
                     currentColor = [leftColor[0], leftColor[1], leftColor[2]];
-                    hDelta = [(rightColor[0] - leftColor[0]) / w,
-                              (rightColor[1] - leftColor[1]) / w,
-                              (rightColor[2] - leftColor[2]) / w];
+                    hDelta = [(rightColor[0] - leftColor[0]) / w, (rightColor[1] - leftColor[1]) / w, (rightColor[2] - leftColor[2]) / w];
 
                     for (j = x; j < right; j += 1) {
                         module.setPixel(context, j, i,
-                                currentColor[0],
-                                currentColor[1],
-                                currentColor[2]);
+                        currentColor[0],
+                        currentColor[1],
+                        currentColor[2]);
 
                         // Move to the next color horizontally.
                         currentColor[0] += hDelta[0];
@@ -114,9 +111,7 @@ var Primitives = {
             fillRectOneColor();
         } else if (!c3) {
             // For this case, we set up the left vertical deltas.
-            leftVDelta = [(c2[0] - c1[0]) / h,
-                      (c2[1] - c1[1]) / h,
-                      (c2[2] - c1[2]) / h];
+            leftVDelta = [(c2[0] - c1[0]) / h, (c2[1] - c1[1]) / h, (c2[2] - c1[2]) / h];
             fillRectTwoColors();
         } else {
             // The four-color case, with a quick assignment in case
@@ -127,12 +122,8 @@ var Primitives = {
             // often than function calls, because this is the rare
             // situation where function call overhead costs more
             // than repeated code.
-            leftVDelta = [(c3[0] - c1[0]) / h,
-                      (c3[1] - c1[1]) / h,
-                      (c3[2] - c1[2]) / h];
-            rightVDelta = [(c4[0] - c2[0]) / h,
-                      (c4[1] - c2[1]) / h,
-                      (c4[2] - c2[2]) / h];
+            leftVDelta = [(c3[0] - c1[0]) / h, (c3[1] - c1[1]) / h, (c3[2] - c1[2]) / h];
+            rightVDelta = [(c4[0] - c2[0]) / h, (c4[1] - c2[1]) / h, (c4[2] - c2[2]) / h];
             fillRectFourColors();
         }
     },
@@ -275,11 +266,11 @@ var Primitives = {
     plotCirclePoints: function (context, xc, yc, x, y, color1, color2) {
         color1 = color1 || [0, 0, 0];
         color2 = color2 || [0, 0, 0];
-        var radius= Math.sqrt(Math.pow(xc-x,2)+Math.pow(yc-y,2)); // JD: 5, 6
-        for(var i=0;i<radius;i++){ // JD: 7
-            var x1= x*(i/radius);
-            var y1= y*(i/radius);
-            var color = [(1-(i/radius))*color1[0] + (i/radius)*color2[0], (1-(i/radius))*color1[1] + (i/radius)*color2[1], (1-(i/radius))*color1[2] + (i/radius)*color2[2]];
+        var radius = Math.sqrt(Math.pow(xc - x, 2) + Math.pow(yc - y, 2)); //  6
+        for (var i = 0; i < radius; i++) { // JD: 7
+            var x1 = x * (i / radius);
+            var y1 = y * (i / radius);
+            var color = [(1 - (i / radius)) * color1[0] + (i / radius) * color2[0], (1 - (i / radius)) * color1[1] + (i / radius) * color2[1], (1 - (i / radius)) * color1[2] + (i / radius) * color2[2]];
             this.setPixel(context, xc + x1, yc + y1, color[0], color[1], color[2]);
             this.setPixel(context, xc + x1, yc - y1, color[0], color[1], color[2]);
             this.setPixel(context, xc + y1, yc + x1, color[0], color[1], color[2]);
@@ -463,14 +454,14 @@ var Primitives = {
 
             globalEdgeList = [], // List of all edges.
             activeEdgeList = [], // List of all edges currently being scanned.
-            i,                   // Reusable index variable.
-            anEdge,              // Temporary edge holder.
-            currentScanLine,     // The scan line that is being drawn.
-            drawPixel,           // Whether we are supposed to plot something.
-            fromX,               // The starting x coordinate of the current scan line.
-            toX,                 // The ending x coordinate of the current scan line.
-            x,                   // Another reusable index variable, for drawing.
-            edgesToRemove;       // For use when, well, removing edges from a list.
+            i, // Reusable index variable.
+            anEdge, // Temporary edge holder.
+            currentScanLine, // The scan line that is being drawn.
+            drawPixel, // Whether we are supposed to plot something.
+            fromX, // The starting x coordinate of the current scan line.
+            toX, // The ending x coordinate of the current scan line.
+            x, // Another reusable index variable, for drawing.
+            edgesToRemove; // For use when, well, removing edges from a list.
 
         // The usual color guard.
         color = color || [0, 0, 0];
@@ -517,7 +508,7 @@ var Primitives = {
                     // No cheating here --- draw each pixel, one by one.
                     for (x = fromX; x <= toX; x += 1) {
                         this.setPixel(context, x, currentScanLine,
-                                color[0], color[1], color[2]);
+                        color[0], color[1], color[2]);
                     }
                 } else {
                     fromX = toScanLine(activeEdgeList[i].currentX);
