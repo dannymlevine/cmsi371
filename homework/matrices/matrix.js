@@ -10,19 +10,29 @@ var Matrix = function(n) {
             }
         }
     }
-    matrix.multiplication = function multiplyMatrices(m2) {
+    matrix.multiplication = function multiplyMatrices(matrix2) {
         var result = [];
-        for (var i = 0; i < matrix.length; i++) {
-            result[i] = [];
-            for (var j = 0; j < m2[0].length; j++) {
-                var sum = 0;
-                for (var k = 0; k < matrix[0].length; k++) {
-                    sum += matrix[i][k] * m2[k][j];
+        if(matrix[0].length !== matrix2.length){
+            throw "Cannot multiply these 2 Matrices"
+        }else{
+            for (var i = 0; i < matrix.length; i++) {
+                result[i] = [];
+                for (var j = 0; j < matrix2[0].length; j++) {
+                    var sum = 0;
+                    for (var k = 0; k < matrix[0].length; k++) {
+                        sum += matrix[i][k] * matrix2[k][j];
+                    }
+                    result[i][j] = sum;
                 }
-                result[i][j] = sum;
             }
+        return result;
         }
-            return result;
+    }
+
+    matrix.translation = function translation(vector){
+        vector.push(1);
+        matrix = matrix.multiplication(vector);
+        return matrix
     }
 
     return matrix
