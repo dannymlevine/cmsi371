@@ -29,9 +29,22 @@ var Matrix = function(n) {
         }
     }
 
-    matrix.translation = function translation(vector){
-        vector.push(1);
-        matrix = matrix.multiplication(vector);
+    matrix.translation = function translation(array){
+        for(var i = 0; i<array.length; i++){
+            matrix[i].push(array[i]);
+        }
+        return matrix
+    }
+    
+    matrix.scale = function scale(scaleSize){
+        var j = 0;
+        for(var i = 0; i<matrix.length; i++){
+            matrix[i][j]=scaleSize[i]
+            if(i>=scaleSize.length){
+                matrix[i][j]=1;
+            }
+            j++
+        }
         return matrix
     }
 
