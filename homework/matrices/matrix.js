@@ -10,7 +10,7 @@ var Matrix = function(n) {
             }
         }
     }
-    
+
     matrix.multiplication = function multiply(matrix2) {
         var result = [];
         if(matrix[0].length !== matrix2.length){
@@ -90,6 +90,35 @@ var Matrix = function(n) {
                    [ (xy * oneMinusC) - zs, (y2 * oneMinusC) + c, (yz * oneMinusC) + xs, 0.0],
                    [ (xz * oneMinusC) + ys, (yz * oneMinusC) - xs, (z2 * oneMinusC) + c, 0.0],
                    [0.0, 0.0, 0.0, 1.0] ];
+        return matrix
+    }
+
+    matrix.orthographic = function orthographic(right,left,top,bottom,near,far){
+        var width = right - left,
+                height = top - bottom,
+                depth = far - near;
+
+        matrix =  [
+                [2.0 / width,
+                0.0,
+                0.0,
+                0.0],
+
+                [0.0,
+                2.0 / height,
+                0.0,
+                0.0],
+
+                [0.0,
+                0.0,
+                -2.0 / depth,
+                0.0],
+
+                [-(right + left) / width,
+                -(top + bottom) / height,
+                -(far + near) / depth,
+                1.0]
+            ];
         return matrix
     }
 
