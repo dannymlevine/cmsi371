@@ -1,11 +1,11 @@
-var Matrix = function(n) {
+var Matrix = function (n) {
     var matrix = [];
-    for(var i=0; i<n; i++) {
+    for (var i = 0; i < n; i++) {
         matrix[i] = [];
-        for(var j=0; j<n; j++) {
-            if(i === j){
-                matrix[i][j] = 1
-            }else{
+        for (var j = 0; j < n; j++) {
+            if (i === j) {
+                matrix[i][j] = 1;
+            } else {
                 matrix[i][j] = 0;
             }
         }
@@ -13,9 +13,9 @@ var Matrix = function(n) {
 
     matrix.multiplication = function multiply(matrix2) {
         var result = [];
-        if(matrix[0].length !== matrix2.length){
-            throw "Cannot multiply these 2 Matrices"
-        }else{
+        if (matrix[0].length !== matrix2.length) {
+            throw "Cannot multiply these 2 Matrices";
+        } else {
             for (var i = 0; i < matrix.length; i++) {
                 result[i] = [];
                 for (var j = 0; j < matrix2[0].length; j++) {
@@ -26,32 +26,30 @@ var Matrix = function(n) {
                     result[i][j] = sum;
                 }
             }
-        return result;
+            return result;
         }
-    }
+    };
 
-    matrix.translation = function translation(array){
-        for(var i = 0; i<array.length; i++){
-            matrix[i].push(array[i]);
+    matrix.translation = function translation(array) {
+        for (var i = 0; i < array.length; i++) {
+            matrix[i][matrix.length - 1] = array[i];
         }
-        return matrix
-    }
-    
-    matrix.scale = function scale(scaleSize){
+        return matrix;
+    };
+
+    matrix.scale = function scale(scaleSize) {
         var j = 0;
-        for(var i = 0; i<matrix.length; i++){
-            matrix[i][j]=scaleSize[i]
-            if(i>=scaleSize.length){
-                matrix[i][j]=1;
+        for (var i = 0; i < matrix.length; i++) {
+            matrix[i][j] = scaleSize[i];
+            if (i >= scaleSize.length) {
+                matrix[i][j] = 1;
             }
-            j++
+            j++;
         }
-        return matrix
-    }
+        return matrix;
+    };
 
-    matrix.rotation = function rotation(angle, x, y, z){
-        // In production code, this function should be associated
-        // with a matrix object with associated functions.
+    matrix.rotation = function rotation(angle, x, y, z) {
         var axisLength = Math.sqrt((x * x) + (y * y) + (z * z)),
             s = Math.sin(angle * Math.PI / 180.0),
             c = Math.cos(angle * Math.PI / 180.0),
@@ -86,59 +84,48 @@ var Matrix = function(n) {
         zs = z * s;
 
         // GL expects its matrices in column major order.
-        matrix = [ [(x2 * oneMinusC) + c, (xy * oneMinusC) + zs, (xz * oneMinusC) - ys, 0.0],
-                   [ (xy * oneMinusC) - zs, (y2 * oneMinusC) + c, (yz * oneMinusC) + xs, 0.0],
-                   [ (xz * oneMinusC) + ys, (yz * oneMinusC) - xs, (z2 * oneMinusC) + c, 0.0],
-                   [0.0, 0.0, 0.0, 1.0] ];
-        return matrix
-    }
+        matrix = [
+            [(x2 * oneMinusC) + c, (xy * oneMinusC) + zs, (xz * oneMinusC) - ys, 0.0],
+            [(xy * oneMinusC) - zs, (y2 * oneMinusC) + c, (yz * oneMinusC) + xs, 0.0],
+            [(xz * oneMinusC) + ys, (yz * oneMinusC) - xs, (z2 * oneMinusC) + c, 0.0],
+            [0.0, 0.0, 0.0, 1.0]
+        ];
+        return matrix;
+    };
 
-    matrix.orthographic = function orthographic(right,left,top,bottom,near,far){
+    matrix.orthographic = function orthographic(right, left, top, bottom, near, far) {
         var width = right - left,
             height = top - bottom,
             depth = far - near;
 
-        matrix =  [
-                [2.0 / width,
-                0.0,
-                0.0,
-                0.0],
+        matrix = [
+            [2.0 / width, 0.0, 0.0, 0.0],
+            [0.0, 2.0 / height, 0.0, 0.0],
+            [0.0, 0.0, -2.0 / depth, 0.0],
+            [-(right + left) / width, -(top + bottom) / height, -(far + near) / depth, 1.0]
+        ];
+        return matrix;
+    };
 
-                [0.0,
-                2.0 / height,
-                0.0,
-                0.0],
-
-                [0.0,
-                0.0,
-                -2.0 / depth,
-                0.0],
-
-                [-(right + left) / width,
-                -(top + bottom) / height,
-                -(far + near) / depth,
-                1.0]
-            ];
-        return matrix
-    }
-
-    matrix.frustum = function frustum(right,left,top,bottom,near,far){
+    matrix.frustum = function frustum(right, left, top, bottom, near, far) {
         var width = right - left,
             height = top - bottom,
             depth = far - near;
 
-        matrix = [[((2 * near) / width), 0 , ((right + left) / width), 0],
-                  [0, ((2 * near) / height), ((top + bottom) / height), 0],
-                  [0, 0, -(far + near) / depth, - ((2 * near * far) / depth)],
-                  [0,  0, -1, 0]]
+        matrix = [
+            [((2 * near) / width), 0, ((right + left) / width), 0],
+            [0, ((2 * near) / height), ((top + bottom) / height), 0],
+            [0, 0, -(far + near) / depth, -((2 * near * far) / depth)],
+            [0, 0, -1, 0]
+        ];
+        return matrix;
+    };
 
-    }
-
-    matrix.toWebGL = function webGl(){
+    matrix.toWebGL = function webGl() {
         var result = [];
         result = result.concat.apply(result, matrix);
-        return result
-    }
+        return result;
+    };
 
-    return matrix
-}
+    return matrix;
+};
