@@ -1,8 +1,7 @@
 /*
  * For maximum modularity, we place everything within a single function that
  * takes the canvas that it will need.
- */
-(function (canvas) {
+ */ (function (canvas) {
 
     // Because many of these variables are best initialized then immediately
     // used in context, we merely name them here.  Read on to see how they
