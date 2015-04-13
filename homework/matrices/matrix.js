@@ -84,12 +84,20 @@ var Matrix = function (n) {
         zs = z * s;
 
         // GL expects its matrices in column major order.
-        matrix = [
+        matrix1 = [
             [(x2 * oneMinusC) + c, (xy * oneMinusC) + zs, (xz * oneMinusC) - ys, 0.0],
             [(xy * oneMinusC) - zs, (y2 * oneMinusC) + c, (yz * oneMinusC) + xs, 0.0],
             [(xz * oneMinusC) + ys, (yz * oneMinusC) - xs, (z2 * oneMinusC) + c, 0.0],
             [0.0, 0.0, 0.0, 1.0]
         ];
+
+        for (var i = 0; i < matrix.length; i++) {
+            for (var j = 0; j < matrix.length; j++) {
+                matrix[i][j] = matrix1[i][j];
+            }
+        }
+
+
         return matrix;
     };
 
@@ -98,12 +106,19 @@ var Matrix = function (n) {
             height = top - bottom,
             depth = far - near;
 
-        matrix = [
+        matrix1 = [
             [2.0 / width, 0.0, 0.0, 0.0],
             [0.0, 2.0 / height, 0.0, 0.0],
             [0.0, 0.0, -2.0 / depth, 0.0],
             [-(right + left) / width, -(top + bottom) / height, -(far + near) / depth, 1.0]
         ];
+
+        for (var i = 0; i < matrix.length; i++) {
+            for (var j = 0; j < matrix.length; j++) {
+                matrix[i][j] = matrix1[i][j];
+            }
+        }
+
         return matrix;
     };
 
@@ -112,12 +127,19 @@ var Matrix = function (n) {
             height = top - bottom,
             depth = far - near;
 
-        matrix = [
+        matrix1 = [
             [((2 * near) / width), 0, ((right + left) / width), 0],
             [0, ((2 * near) / height), ((top + bottom) / height), 0],
             [0, 0, -(far + near) / depth, -((2 * near * far) / depth)],
             [0, 0, -1, 0]
         ];
+
+        for (var i = 0; i < matrix.length; i++) {
+            for (var j = 0; j < matrix.length; j++) {
+                matrix[i][j] = matrix1[i][j];
+            }
+        }
+
         return matrix;
     };
 
