@@ -95,8 +95,8 @@ var Matrix = function(n) {
 
     matrix.orthographic = function orthographic(right,left,top,bottom,near,far){
         var width = right - left,
-                height = top - bottom,
-                depth = far - near;
+            height = top - bottom,
+            depth = far - near;
 
         matrix =  [
                 [2.0 / width,
@@ -120,6 +120,18 @@ var Matrix = function(n) {
                 1.0]
             ];
         return matrix
+    }
+
+    matrix.frustum = function frustum(right,left,top,bottom,near,far){
+        var width = right - left,
+            height = top - bottom,
+            depth = far - near;
+
+        matrix = [[((2 * near) / width), 0 , ((right + left) / width), 0],
+                  [0, ((2 * near) / height), ((top + bottom) / height), 0],
+                  [0, 0, -(far + near) / depth, - ((2 * near * far) / depth)],
+                  [0,  0, -1, 0]]
+
     }
 
     return matrix
