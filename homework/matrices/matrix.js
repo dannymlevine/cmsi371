@@ -134,5 +134,11 @@ var Matrix = function(n) {
 
     }
 
+    matrix.toWebGL = function webGl(){
+        var result = [];
+        result = result.concat.apply(result, matrix);
+        return result
+    }
+
     return matrix
 }
