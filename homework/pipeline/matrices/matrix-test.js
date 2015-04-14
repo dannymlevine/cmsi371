@@ -1,6 +1,3 @@
-/*
- * Unit tests for our vector object.
- */
 $(function () {
 
     // This suite checks instantiation basics.
