@@ -9,6 +9,7 @@
     var gl, // The WebGL context.
 
     // This variable stores 3D model information.
+    // JD: 2(a)
     objectsToDraw,
 
     // The shader program to use.
@@ -45,6 +46,7 @@
          * Based on the original glRotate reference:
          *     http://www.opengl.org/sdk/docs/man/xhtml/glRotate.xml
          */
+        // JD: 2(b)
         getRotationMatrix = function (angle, x, y, z) {
             // In production code, this function should be associated
             // with a matrix object with associated functions.
@@ -115,6 +117,7 @@
     gl.viewport(0, 0, canvas.width, canvas.height);
 
     // Build the objects to display.
+    // JD: 3(a)
     objectsToDraw = [{
         color: {
             r: 0.0,
@@ -151,11 +154,14 @@
             g: 0.0,
             b: 0.0
         },
+        // JD: 4(a)
         vertices: Shapes.drawSphere(Shapes.sphere()),
         mode: gl.LINES
     }];
+    // JD: 5(a)
 
     // Pass the vertices to WebGL.
+    // JD: 6(a)
     for (i = 0, maxi = objectsToDraw.length; i < maxi; i += 1) {
         objectsToDraw[i].buffer = GLSLUtilities.initVertexBuffer(gl,
         objectsToDraw[i].vertices);
@@ -178,6 +184,7 @@
 
     // Initialize the shaders.
     shaderProgram = GLSLUtilities.initSimpleShaderProgram(
+        // JD: 7(a)
     gl,
     $("#vertex-shader").text(),
     $("#fragment-shader").text(),
@@ -223,6 +230,7 @@
         gl.bindBuffer(gl.ARRAY_BUFFER, object.buffer);
         gl.vertexAttribPointer(vertexPosition, 3, gl.FLOAT, false, 0, 0);
         gl.drawArrays(object.mode, 0, object.vertices.length / 3);
+        // JD: 8(a)
     };
 
     /*

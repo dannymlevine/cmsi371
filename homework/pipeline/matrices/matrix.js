@@ -30,6 +30,7 @@ var Matrix = function (n) {
         }
     };
 
+    // JD: 6(b)
     matrix.translation = function translation(array) {
         for (var i = 0; i < array.length; i++) {
             matrix[i][matrix.length - 1] = array[i];
@@ -49,6 +50,7 @@ var Matrix = function (n) {
         return matrix;
     };
 
+    // JD: 7(b), 8(b)
     matrix.rotation = function rotation(angle, x, y, z) {
         var axisLength = Math.sqrt((x * x) + (y * y) + (z * z)),
             s = Math.sin(angle * Math.PI / 180.0),
@@ -122,6 +124,7 @@ var Matrix = function (n) {
         return matrix;
     };
 
+    // JD: 9(b)
     matrix.frustum = function frustum(right, left, top, bottom, near, far) {
         var width = right - left,
             height = top - bottom,
@@ -149,5 +152,6 @@ var Matrix = function (n) {
         return result;
     };
 
+    // JD: 10(b)
     return matrix;
 };

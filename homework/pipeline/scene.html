@@ -48,6 +48,7 @@
             varying vec4 finalVertexColor;
             uniform mat4 rotationMatrix;
             void main(void) {
+                // JD: 1(b)
                 gl_Position = rotationMatrix * vec4(vertexPosition, 1.0);
                 finalVertexColor = vec4(vertexColor, 1.0);
             }
@@ -68,6 +69,7 @@
         </script>
 
         <!-- This script sets up the specific scene for this page. -->
-        <script src="hello-gl-again.js"></script>
+        <!-- JD: 1(a) -->
+        <script src="scene.js"></script>
   </body>
 </html>

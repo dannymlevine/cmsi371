@@ -5,7 +5,7 @@
  */
 
 var Shapes = {
-
+    // JD: 9(a)
     cylinder: function () {
         return {
             vertices: [],
@@ -92,6 +92,7 @@ var Shapes = {
         for (i = 0, maxi = indexedVertices.indices.length; i < maxi; i += 1) {
             for (j = 0, maxj = indexedVertices.indices[i].length; j < maxj; j += 1) {
                 result = result.concat(
+                    // JD: 7(a)
                 indexedVertices.vertices[
                 indexedVertices.indices[i][j]],
 
@@ -103,6 +104,7 @@ var Shapes = {
         return result;
     },
 
+    // JD: 10(a)
     drawCylinder: function (indexedVertices) {
         var center = [0, 0, 0];
         var radius = 0.5;
@@ -110,6 +112,7 @@ var Shapes = {
         var angleInRadians;
         var s;
         var c;
+        // JD: 11(a)
         var MAGIC_NUMBER = 360;
         var max = 2 * Math.PI;
         var incr = max / MAGIC_NUMBER;
@@ -130,6 +133,7 @@ var Shapes = {
         for (i = 0, maxi = indexedVertices.indices.length; i < maxi; i += 1) {
             for (j = 0, maxj = indexedVertices.indices[i].length; j < maxj; j += 1) {
                 result = result.concat(
+                    // JD: 7(a)
                 indexedVertices.vertices[
                 indexedVertices.indices[i][j]],
 
@@ -141,7 +145,7 @@ var Shapes = {
     },
 
     //http://www.webglacademy.com/courses.php#16
-
+    // JD: 12(a)
     drawSphere: function (indexedVertices) {
         var numberOfVertices = 0;
         var theta, phi;
@@ -170,6 +174,7 @@ var Shapes = {
         for (i = 0, maxi = indexedVertices.indices.length; i < maxi; i += 1) {
             for (j = 0, maxj = indexedVertices.indices[i].length; j < maxj; j += 1) {
                 result = result.concat(
+                    // JD: 7(a)
                 indexedVertices.vertices[
                 indexedVertices.indices[i][j]]);
             }
@@ -184,7 +189,7 @@ var Shapes = {
         var angleInRadians;
         var s;
         var c;
-        var MAGIC_NUMBER = 360;
+        var MAGIC_NUMBER = 360; // JD: 11(a)
         var max = 2 * Math.PI;
         var incr = max / MAGIC_NUMBER;
         for (angleInRadians = 0; angleInRadians < max; angleInRadians += incr) {
@@ -207,6 +212,7 @@ var Shapes = {
         for (i = 0, maxi = indexedVertices.indices.length; i < maxi; i += 1) {
             for (j = 0, maxj = indexedVertices.indices[i].length; j < maxj; j += 1) {
                 result = result.concat(
+                    // JD: 7(a)
                 indexedVertices.vertices[
                 indexedVertices.indices[i][j]],
 
@@ -217,4 +223,5 @@ var Shapes = {
         return result;
     }
 
+    // JD: 11(b)
 };

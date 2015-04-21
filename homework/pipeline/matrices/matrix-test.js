@@ -50,6 +50,7 @@ $(function () {
         equal(v.length, 4, "Matrix size");
         equal(x.length, 4, "Matrix size");
 
+        // JD: 4(b)
         v.translation([1, 2, 3]);
         v.scale([2, 3, 4]);
         x.translation([1, 2, 3]);
@@ -123,4 +124,5 @@ $(function () {
 
     });
 
+    // JD: 5(b)
 });
