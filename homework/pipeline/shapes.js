@@ -5,28 +5,97 @@
  */
 
 var Shapes = {
-    // JD: 9(a)
-    cylinder: function () {
-        return {
-            vertices: [],
 
-            indices: []
+    cylinder: function () {
+        var vertices = []
+        var indices = []
+
+        var center = [0, 0, 0];
+        var radius = 0.5;
+        var l = 20;
+        var angleInRadians;
+        var s;
+        var c;
+        var degreesInCircle = 360;
+        var max = 2 * Math.PI;
+        var incr = max / degreesInCircle;
+        for (angleInRadians = 0; angleInRadians < max; angleInRadians += incr) {
+            s = Math.sin(angleInRadians);
+            c = Math.cos(angleInRadians);
+            for (var i = radius; i >= -radius; i -= 0.05) {
+                vertices.push([s / 2, i, c / 2])
+            }
+        }
+        for (var j = 0; j < vertices.length; j++) {
+            indices.push([j, l++, j])
+        }
+        return {
+            vertices: vertices,
+
+            indices: indices
 
         }
     },
 
     cone: function () {
+        var vertices = []
+        var indices = []
+        var center = [0, 0, 0];
+        var radius = 0.5;
+        var l = 20;
+        var angleInRadians;
+        var s;
+        var c;
+        var degreesInCircle = 360; // JD: 11(a)
+        var max = 2 * Math.PI;
+        var incr = max / degreesInCircle;
+        for (angleInRadians = 0; angleInRadians < max; angleInRadians += incr) {
+            s = Math.sin(angleInRadians);
+            c = Math.cos(angleInRadians);
+
+            for (var i = radius; i >= -radius; i -= 0.05) {
+                var ratio = i - 1 * radius
+                vertices.push([s / 2 * ratio, i, c / 2 * ratio])
+            }
+        }
+        for (var j = 0; j < vertices.length; j++) {
+            indices.push([j, l++, j])
+        }
         return {
-            vertices: [],
-            indices: []
+            vertices: vertices,
+            indices: indices
 
         }
     },
 
+    //http://www.webglacademy.com/courses.php#16
     sphere: function () {
+        var vertices = []
+        var indices = []
+        var numberOfVertices = 0;
+        var theta, phi;
+        for (var i = 0; i <= 64; i++) {
+            phi = Math.PI * i / 64;
+
+            for (j = 0; j <= 32; j++) {
+                theta = 2 * Math.PI * j / 32;
+
+                vertices.push([Math.cos(theta) * Math.sin(phi), Math.cos(phi), Math.sin(theta) * Math.sin(phi)])
+                if (i !== 0) {
+                    indices.push([i * (32 + 1) + j, i * (32 + 1) + j - 1, (i - 1) * (32 + 1) + j]);
+                    numberOfVertices += 3;
+                }
+                if (i !== 0 && i !== 1) {
+                    indices.push([i * (32 + 1) + j - 1, (i - 1) * (32 + 1) + j, (i - 1) * (32 + 1) + j - 1]);
+                    numberOfVertices += 3;
+                }
+            }
+        }
         return {
-            vertices: [],
-            indices: []
+            vertices: vertices,
+
+            indices: indices
+
         }
     },
 
@@ -104,124 +173,82 @@ var Shapes = {
         return result;
     },
 
-    // JD: 10(a)
-    drawCylinder: function (indexedVertices) {
-        var center = [0, 0, 0];
-        var radius = 0.5;
-        var l = 20;
-        var angleInRadians;
-        var s;
-        var c;
-        // JD: 11(a)
-        var MAGIC_NUMBER = 360;
-        var max = 2 * Math.PI;
-        var incr = max / MAGIC_NUMBER;
-        for (angleInRadians = 0; angleInRadians < max; angleInRadians += incr) {
-            s = Math.sin(angleInRadians);
-            c = Math.cos(angleInRadians);
-            for (var i = radius; i >= -radius; i -= 0.05) {
-                indexedVertices.vertices.push([s / 2, i, c / 2])
-            }
-        }
-        for (var j = 0; j < indexedVertices.vertices.length; j++) {
-            indexedVertices.indices.push([j, l++, j])
-        }
-        var result = [],
-            maxi,
-            maxj;
+    /*
+     * Utility function for computing normal vectors based on indexed vertices.
+     * The secret: take the cross product of each triangle.  Note that vertex order
+     * now matters---the resulting normal faces out from the side of the triangle
+     * that "sees" the vertices listed counterclockwise.
+     *
+     * The vector computations involved here mean that the Vector module must be
+     * loaded up for this function to work.
+     */
 
+    toNormalArray: function (indexedVertices) {
+        var result = [],
+            i,
+            j,
+            maxi,
+            maxj,
+            p0,
+            p1,
+            p2,
+            v0,
+            v1,
+            v2,
+            normal;
+
+        // For each face...
         for (i = 0, maxi = indexedVertices.indices.length; i < maxi; i += 1) {
+            // We form vectors from the first and second then second and third vertices.
+            p0 = indexedVertices.vertices[indexedVertices.indices[i][0]];
+            p1 = indexedVertices.vertices[indexedVertices.indices[i][1]];
+            p2 = indexedVertices.vertices[indexedVertices.indices[i][2]];
+
+            // Technically, the first value is not a vector, but v can stand for vertex
+            // anyway, so...
+            v0 = new Vector(p0[0], p0[1], p0[2]);
+            v1 = new Vector(p1[0], p1[1], p1[2]).subtract(v0);
+            v2 = new Vector(p2[0], p2[1], p2[2]).subtract(v0);
+            normal = v1.cross(v2).unit();
+
+            // We then use this same normal for every vertex in this face.
             for (j = 0, maxj = indexedVertices.indices[i].length; j < maxj; j += 1) {
                 result = result.concat(
-                    // JD: 7(a)
-                indexedVertices.vertices[
-                indexedVertices.indices[i][j]],
-
-                indexedVertices.vertices[
-                indexedVertices.indices[i][(j + 1) % maxj]]);
+                    [ normal.x(), normal.y(), normal.z() ]
+                );
             }
         }
+
         return result;
     },
 
-    //http://www.webglacademy.com/courses.php#16
-    // JD: 12(a)
-    drawSphere: function (indexedVertices) {
-        var numberOfVertices = 0;
-        var theta, phi;
-        for (var i = 0; i <= 64; i++) {
-            phi = Math.PI * i / 64;
-
-            for (j = 0; j <= 32; j++) {
-                theta = 2 * Math.PI * j / 32;
-
-                indexedVertices.vertices.push([Math.cos(theta) * Math.sin(phi), Math.cos(phi), Math.sin(theta) * Math.sin(phi)])
-                if (i !== 0) {
-                    indexedVertices.indices.push([i * (32 + 1) + j, i * (32 + 1) + j - 1, (i - 1) * (32 + 1) + j]);
-                    numberOfVertices += 3;
-                }
-                if (i !== 0 && i !== 1) {
-                    indexedVertices.indices.push([i * (32 + 1) + j - 1, (i - 1) * (32 + 1) + j, (i - 1) * (32 + 1) + j - 1]);
-                    numberOfVertices += 3;
-                }
-            }
-        }
-
+    /*
+     * Another utility function for computing normals, this time just converting
+     * every vertex into its unit vector version.  This works mainly for objects
+     * that are centered around the origin.
+     */
+    toVertexNormalArray: function (indexedVertices) {
         var result = [],
+            i,
+            j,
             maxi,
-            maxj;
+            maxj,
+            p,
+            normal;
 
+        // For each face...
         for (i = 0, maxi = indexedVertices.indices.length; i < maxi; i += 1) {
+            // For each vertex in that face...
             for (j = 0, maxj = indexedVertices.indices[i].length; j < maxj; j += 1) {
+                p = indexedVertices.vertices[indexedVertices.indices[i][j]];
+                normal = new Vector(p[0], p[1], p[2]).unit();
                 result = result.concat(
-                    // JD: 7(a)
-                indexedVertices.vertices[
-                indexedVertices.indices[i][j]]);
+                    [ normal.x(), normal.y(), normal.z() ]
+                );
             }
         }
-        return result;
-    },
 
-    drawCone: function (indexedVertices) {
-        var center = [0, 0, 0];
-        var radius = 0.5;
-        var l = 20;
-        var angleInRadians;
-        var s;
-        var c;
-        var MAGIC_NUMBER = 360; // JD: 11(a)
-        var max = 2 * Math.PI;
-        var incr = max / MAGIC_NUMBER;
-        for (angleInRadians = 0; angleInRadians < max; angleInRadians += incr) {
-            s = Math.sin(angleInRadians);
-            c = Math.cos(angleInRadians);
-
-            for (var i = radius; i >= -radius; i -= 0.05) {
-                var ratio = i - 1 * radius
-                indexedVertices.vertices.push([s / 2 * ratio, i, c / 2 * ratio])
-            }
-        }
-        for (var j = 0; j < indexedVertices.vertices.length; j++) {
-            indexedVertices.indices.push([j, l++, j])
-        }
-
-        var result = [],
-            maxi,
-            maxj;
-
-        for (i = 0, maxi = indexedVertices.indices.length; i < maxi; i += 1) {
-            for (j = 0, maxj = indexedVertices.indices[i].length; j < maxj; j += 1) {
-                result = result.concat(
-                    // JD: 7(a)
-                indexedVertices.vertices[
-                indexedVertices.indices[i][j]],
-
-                indexedVertices.vertices[
-                indexedVertices.indices[i][(j + 1) % maxj]]);
-            }
-        }
         return result;
     }
 
-    // JD: 11(b)
 };
