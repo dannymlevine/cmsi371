@@ -4,11 +4,24 @@
  * converting these into "raw" coordinate arrays.
  */
 
-var Shapes = {
+var Shapes = (function(){
+    var shapes = function(attributes){
+        this.color = attributes.color || {r:0,b:1,g:0}
+        this.children = attributes.children || []
+        this.vertices = attributes.vertices || []
+        this.indices = attributes.indices || []
+        this.shininess = attributes.shininess || 5
+        this.specularColor = attributes.specularColor || {r:0,b:1,g:0}
+        //this.normals = attributes.normals || 
+        this.mode = attributes.mode
+        this.tansforms = {}
+        //this.transforms.scale = attributes.transforms.scale || [0.5,0.5,0.5]
+        //this.transforms.translate = attributes.transforms.translate || [1,1,1]
+    };
 
-    cylinder: function () {
-        var vertices = []
-        var indices = []
+    shapes.cylinder = function () {
+        this.vertices = []
+        this.indices = []
 
         var center = [0, 0, 0];
         var radius = 0.5;
@@ -23,23 +36,23 @@ var Shapes = {
             s = Math.sin(angleInRadians);
             c = Math.cos(angleInRadians);
             for (var i = radius; i >= -radius; i -= 0.05) {
-                vertices.push([s / 2, i, c / 2])
+                this.vertices.push([s / 2, i, c / 2])
             }
         }
-        for (var j = 0; j < vertices.length; j++) {
-            indices.push([j, l++, j])
+        for (var j = 0; j < this.vertices.length; j++) {
+            this.indices.push([j, l++, j])
         }
         return {
-            vertices: vertices,
+            vertices: this.vertices,
 
-            indices: indices
+            indices: this.indices
 
         }
     },
 
-    cone: function () {
-        var vertices = []
-        var indices = []
+    shapes.cone = function () {
+        this.vertices = []
+        this.indices = []
         var center = [0, 0, 0];
         var radius = 0.5;
         var l = 20;
@@ -55,23 +68,23 @@ var Shapes = {
 
             for (var i = radius; i >= -radius; i -= 0.05) {
                 var ratio = i - 1 * radius
-                vertices.push([s / 2 * ratio, i, c / 2 * ratio])
+                this.vertices.push([s / 2 * ratio, i, c / 2 * ratio])
             }
         }
-        for (var j = 0; j < vertices.length; j++) {
-            indices.push([j, l++, j])
+        for (var j = 0; j < this.vertices.length; j++) {
+            this.indices.push([j, l++, j])
         }
         return {
-            vertices: vertices,
-            indices: indices
+            vertices: this.vertices,
+            indices: this.indices
 
         }
     },
 
     //http://www.webglacademy.com/courses.php#16
-    sphere: function () {
-        var vertices = []
-        var indices = []
+    shapes.sphere = function () {
+        this.vertices = []
+        this.indices = []
         var numberOfVertices = 0;
         var theta, phi;
         for (var i = 0; i <= 64; i++) {
@@ -80,27 +93,27 @@ var Shapes = {
             for (j = 0; j <= 32; j++) {
                 theta = 2 * Math.PI * j / 32;
 
-                vertices.push([Math.cos(theta) * Math.sin(phi), Math.cos(phi), Math.sin(theta) * Math.sin(phi)])
+                this.vertices.push([Math.cos(theta) * Math.sin(phi), Math.cos(phi), Math.sin(theta) * Math.sin(phi)])
                 if (i !== 0) {
-                    indices.push([i * (32 + 1) + j, i * (32 + 1) + j - 1, (i - 1) * (32 + 1) + j]);
+                    this.indices.push([i * (32 + 1) + j, i * (32 + 1) + j - 1, (i - 1) * (32 + 1) + j]);
                     numberOfVertices += 3;
                 }
                 if (i !== 0 && i !== 1) {
-                    indices.push([i * (32 + 1) + j - 1, (i - 1) * (32 + 1) + j, (i - 1) * (32 + 1) + j - 1]);
+                    this.indices.push([i * (32 + 1) + j - 1, (i - 1) * (32 + 1) + j, (i - 1) * (32 + 1) + j - 1]);
                     numberOfVertices += 3;
                 }
             }
         }
         return {
-            vertices: vertices,
+            vertices: this.vertices,
 
-            indices: indices
+            indices: this.indices
 
         }
     },
 
-    doublePyramid: function () {
-        return {
+    shapes.doublePyramid = function () {
+        return new shapes({
             vertices: [
                 [0, 0, 0],
                 [0.1, 0.1, 0.1],
@@ -122,14 +135,14 @@ var Shapes = {
                 [5, 7, 8],
                 [6, 7, 8]
             ]
-        }
+        })
     },
 
     /*
      * Utility function for turning indexed vertices into a "raw" coordinate array
      * arranged as triangles.
      */
-    toRawTriangleArray: function (indexedVertices) {
+    shapes.toRawTriangleArray = function (indexedVertices) {
         var result = [],
             i,
             j,
@@ -151,7 +164,7 @@ var Shapes = {
      * Utility function for turning indexed vertices into a "raw" coordinate array
      * arranged as line segments.
      */
-    toRawLineArray: function (indexedVertices) {
+    shapes.toRawLineArray = function (indexedVertices) {
         var result = [],
             i,
             j,
@@ -183,7 +196,7 @@ var Shapes = {
      * loaded up for this function to work.
      */
 
-    toNormalArray: function (indexedVertices) {
+    shapes.toNormalArray = function (indexedVertices) {
         var result = [],
             i,
             j,
@@ -227,7 +240,7 @@ var Shapes = {
      * every vertex into its unit vector version.  This works mainly for objects
      * that are centered around the origin.
      */
-    toVertexNormalArray: function (indexedVertices) {
+    shapes.toVertexNormalArray = function (indexedVertices) {
         var result = [],
             i,
             j,
@@ -250,5 +263,6 @@ var Shapes = {
 
         return result;
     }
+    return shapes
 
-};
+})()
