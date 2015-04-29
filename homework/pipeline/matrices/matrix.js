@@ -32,41 +32,29 @@ matrix.prototype.multiplication = function (matrix2) {
     }
 },
 
-matrix.prototype.translation = function (array) {
-    matrix1 = [
+matrix.translation = function (array) {
+    this.matrixArray = [
         [1, 0, 0, array[0]],
         [0, 1, 0, array[1]],
         [0, 0, 1, array[2]],
         [0.0, 0.0, 0.0, 1.0]
     ];
 
-    for (var i = 0; i < this.matrixArray.length; i++) {
-        for (var j = 0; j < this.matrixArray.length; j++) {
-            this.matrixArray[i][j] = matrix1[i][j];
-        }
-    }
-
     return matrix;
 },
 
-matrix.prototype.scale = function (scaleSize) {
-    matrix1 = [
+matrix.scale = function (scaleSize) {
+    this.matrixArray = [
         [scaleSize[0], 0, 0, 0],
         [0, scaleSize[1], 0, 0],
         [0, 0, scaleSize[2], 0],
         [0.0, 0.0, 0.0, 1.0]
     ];
 
-    for (var i = 0; i < this.matrixArray.length; i++) {
-        for (var j = 0; j < this.matrixArray.length; j++) {
-            this.matrixArray[i][j] = matrix1[i][j];
-        }
-    }
-
     return matrix;
 },
 
-matrix.prototype.rotation = function (angle, x, y, z) {
+matrix.rotation = function (angle, x, y, z) {
     var axisLength = Math.sqrt((x * x) + (y * y) + (z * z)),
         s = Math.sin(angle * Math.PI / 180.0),
         c = Math.cos(angle * Math.PI / 180.0),
@@ -118,7 +106,7 @@ matrix.prototype.rotation = function (angle, x, y, z) {
     return matrix;
 },
 
-matrix.prototype.orthographic = function (right, left, top, bottom, near, far) {
+matrix.orthographic = function (right, left, top, bottom, near, far) {
     var width = right - left,
         height = top - bottom,
         depth = far - near;
@@ -139,7 +127,7 @@ matrix.prototype.orthographic = function (right, left, top, bottom, near, far) {
     return matrix;
 },
 
-matrix.prototype.frustum = function (right, left, top, bottom, near, far) {
+matrix.frustum = function (right, left, top, bottom, near, far) {
     var width = right - left,
         height = top - bottom,
         depth = far - near;
@@ -160,7 +148,7 @@ matrix.prototype.frustum = function (right, left, top, bottom, near, far) {
     return matrix;
 },
 
-matrix.prototype.toWebGL = function () {
+matrix.toWebGL = function () {
     var result = [];
     result = result.concat.apply(result, this.matrixArray);
     return result;
