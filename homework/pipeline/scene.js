@@ -95,31 +95,37 @@
         //     mode: gl.LINES
         // }),
 
-        // new shapes({
+        // {
         //      color: {
         //         r: 1.0,
         //         g: 0.0,
         //         b: 0.0
         //     },
-        //     vertices: shapes.toRawLineArray(Shapes.sphere()),
+        //     specularColor: {
+        //         r:1.0,
+        //         g:1.0,
+        //         b:1.0
+        //     },
+        //     vertices: Shapes.toRawLineArray(Shapes.sphere()),
         //     mode: gl.LINES
-        // })
+        // },
 
-        new Shapes({
+        {
             color: {
                 r: 0.0,
                 g: 1.0,
                 b: 0.0
             },
             specularColor: {
-                r:1,
-                g:0.0,
-                b:0.0
+                r:1.0,
+                g:1.0,
+                b:1.0
             },
+            shininess: 10,
             normals: Shapes.toNormalArray(Shapes.doublePyramid()),
             vertices: Shapes.toRawTriangleArray(Shapes.doublePyramid()),
             mode: gl.TRIANGLES
-        })
+        }
     ];
     // JD: 5(a)
     console.log(objectsToDraw)
@@ -232,7 +238,7 @@
      * Displays an individual object.
      */
     drawObject = function (object) {
-        for (var i = 0; i < objectsToDraw.length; i++) {
+
         var instanceMat = new matrix(4);
         // Set the varying colors.
         gl.bindBuffer(gl.ARRAY_BUFFER, object.colorBuffer);
@@ -251,7 +257,6 @@
         gl.bindBuffer(gl.ARRAY_BUFFER, object.buffer);
         gl.vertexAttribPointer(vertexPosition, 3, gl.FLOAT, false, 0, 0);
         gl.drawArrays(object.mode, 0, object.vertices.length / 3);
-    }
         // JD: 8(a)
     };
 
@@ -310,6 +315,15 @@
         previousTimestamp = timestamp;
         window.requestAnimationFrame(advanceScene);
     };
+
+    gl.uniformMatrix4fv(projectionMatrix, gl.FALSE, new Float32Array(matrix.orthographic(
+        -2 * (canvas.width / canvas.height),
+        2 * (canvas.width / canvas.height),
+        -2,
+        2,
+        -10,
+        10
+    ).toWebGL()));
 
     gl.uniform4fv(lightPosition, [500.0, 1000.0, 100.0, 1.0]);
     gl.uniform3fv(lightDiffuse, [1.0, 1.0, 1.0]);
