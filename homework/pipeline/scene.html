@@ -2,20 +2,16 @@
 <html>
     <head>
         <meta charset="UTF-8"/>
-        <title>Hello WebGL (again)</title>
-        <link rel="stylesheet" href="hello-gl-again.css" />
+        <title>Scene</title>
+        <link rel="stylesheet" href="scene.css" />
     </head>
     <body>
-        <h1>Hello WebGL (again)!</h1>
+        <h1>Weclome to my 3D scene!</h1>
 
         <p>You’ll need a WebGL-capable web browser to see anything here;
             instructions can be found in this
             <a href="http://www.khronos.org/webgl/wiki/Getting_a_WebGL_Implementation">official
             WebGL wiki page</a>.</p>
-
-        <p>This page adds a few more fundamental features, showing how
-            further functionality can be added to the software stack.
-            Click the canvas to see what else is new.</p>
 
         <canvas id="hello-webgl" width="512" height="512">
             Sorry, your web browser does not appear to support
@@ -53,7 +49,6 @@
             uniform mat4 projectionMatrix;
             uniform mat4 translationMatrix;
             uniform mat4 scaleMatrix;
-            uniform mat4 translationMatrix;
             uniform mat4 rotationMatrix;
             // We don't calculate color in the vertex shader anymore.  Instead,
             // we will pass on information that will affect the color later.
