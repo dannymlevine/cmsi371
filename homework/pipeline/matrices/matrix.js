@@ -54,10 +54,11 @@ matrix.scale = function (scaleSize) {
     return matrix;
 },
 
-matrix.rotation = function (angle, x, y, z) {
-    var axisLength = Math.sqrt((x * x) + (y * y) + (z * z)),
-        s = Math.sin(angle * Math.PI / 180.0),
-        c = Math.cos(angle * Math.PI / 180.0),
+angle, x, y, z
+matrix.rotation = function (rotationArray) {
+    var axisLength = Math.sqrt((rotationArray[1] * rotationArray[1]) + (rotationArray[2] * rotationArray[2]) + (rotationArray[3] * rotationArray[3])),
+        s = Math.sin(rotationArray[0] * Math.PI / 180.0),
+        c = Math.cos(rotationArray[0] * Math.PI / 180.0),
         oneMinusC = 1.0 - c,
 
         // We can't calculate this until we have normalized
@@ -73,20 +74,20 @@ matrix.rotation = function (angle, x, y, z) {
         zs;
 
     // Normalize the axis vector of rotation.
-    x /= axisLength;
-    y /= axisLength;
-    z /= axisLength;
+    rotationArray[1] /= axisLength;
+    rotationArray[2] /= axisLength;
+    rotationArray[3] /= axisLength;
 
     // *Now* we can calculate the other terms.
-    x2 = x * x;
-    y2 = y * y;
-    z2 = z * z;
-    xy = x * y;
-    yz = y * z;
-    xz = x * z;
-    xs = x * s;
-    ys = y * s;
-    zs = z * s;
+    x2 = rotationArray[1] * rotationArray[1];
+    y2 = rotationArray[2] * rotationArray[2];
+    z2 = rotationArray[3] * rotationArray[3];
+    xy = rotationArray[1] * rotationArray[2];
+    yz = rotationArray[2] * rotationArray[3];
+    xz = rotationArray[1] * rotationArray[3];
+    xs = rotationArray[1] * s;
+    ys = rotationArray[2] * s;
+    zs = rotationArray[3] * s;
 
     // GL expects its matrices in column major order.
     matrix1 = [
@@ -147,6 +148,21 @@ matrix.frustum = function (right, left, top, bottom, near, far) {
 
     return matrix;
 },
+
+matrix.lookAtMatrix = function(x1,y1,z1,x2,y2,z2,x3,y3,z3){
+    var xaxis = new vector1(x1,y1,z1)
+    var yaxis = new vector2(x2,y2,z2)
+    var zaxis = new vector3(x3,y3,z3)
+
+    this.matrixArray = [
+        [xaxis.x, xaxis.y, xaxis.z, 0],
+        [yaxis.x, yaxis.y, xaxis.z, 0],
+        [zaxis.x, zaxis.y, xaxis.z, 0],
+        [0.0, 0.0, 0.0, 1.0]
+    ];
+
+    return matrix
+}
 
 matrix.toWebGL = function () {
     var result = [];

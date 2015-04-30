@@ -72,7 +72,7 @@ $(function () {
 
         equal(v.matrixArray.length, 4, "Matrix size");
 
-        v.rotation(90, 2, 3, 4);
+        v.rotation([90, 2, 3, 4]);
 
         equal(v.matrixArray[0][0], 0.13793103448275865, "First element of first row");
         equal(v.matrixArray[1][1], 0.3103448275862069, "Second element of second row");
