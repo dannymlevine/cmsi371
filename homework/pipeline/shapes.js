@@ -6,22 +6,24 @@
 
 var Shapes = (function(){
     var shapes = function(attributes){
+        attributes.transforms = attributes.transforms || {}
         this.color = attributes.color || {r:0,b:1,g:0}
         this.children = attributes.children || []
         this.vertices = attributes.vertices || []
         this.indices = attributes.indices || []
         this.shininess = attributes.shininess || 5
         this.specularColor = attributes.specularColor || {r:0,b:1,g:0}
-        //this.normals = attributes.normals || 
+        this.normals = attributes.normals || []
         this.mode = attributes.mode
-        this.tansforms = {}
-        //this.transforms.scale = attributes.transforms.scale || [0.5,0.5,0.5]
-        //this.transforms.translate = attributes.transforms.translate || [1,1,1]
+        this.transforms = {}
+        this.transforms.scale = attributes.transforms.scale || [0.5,0.5,0.5]
+        this.transforms.translate = attributes.transforms.translate || [1,1,1]
+        this.transforms.rotate = attributes.transforms.rotate || [90,1,2,3] 
     };
 
     shapes.cylinder = function () {
-        this.vertices = []
-        this.indices = []
+        var vertices = []
+        var indices = []
 
         var center = [0, 0, 0];
         var radius = 0.5;
@@ -36,30 +38,35 @@ var Shapes = (function(){
             s = Math.sin(angleInRadians);
             c = Math.cos(angleInRadians);
             for (var i = radius; i >= -radius; i -= 0.05) {
-                this.vertices.push([s / 2, i, c / 2])
+                vertices.push([s / 2, i, c / 2])
             }
         }
-        for (var j = 0; j < this.vertices.length; j++) {
-            this.indices.push([j, l++, j])
+        for (var j = 0; j < vertices.length; j++) {
+            if(l+1 < vertices.length ){
+                indices.push([j, l++, j+1])
+            }
         }
-        return {
-            vertices: this.vertices,
-
-            indices: this.indices
-
+        for (var k = 0;k<20;k++ ){
+            indices.push([k*360,k,k])
         }
+        return new Shapes ({
+            vertices: vertices,
+
+            indices: indices
+
+        })
     },
 
     shapes.cone = function () {
-        this.vertices = []
-        this.indices = []
+        var vertices = []
+        var indices = []
         var center = [0, 0, 0];
         var radius = 0.5;
         var l = 20;
         var angleInRadians;
         var s;
         var c;
-        var degreesInCircle = 360; // JD: 11(a)
+        var degreesInCircle = 360;
         var max = 2 * Math.PI;
         var incr = max / degreesInCircle;
         for (angleInRadians = 0; angleInRadians < max; angleInRadians += incr) {
@@ -68,23 +75,28 @@ var Shapes = (function(){
 
             for (var i = radius; i >= -radius; i -= 0.05) {
                 var ratio = i - 1 * radius
-                this.vertices.push([s / 2 * ratio, i, c / 2 * ratio])
+                vertices.push([s / 2 * ratio, i, c / 2 * ratio])
             }
         }
-        for (var j = 0; j < this.vertices.length; j++) {
-            this.indices.push([j, l++, j])
+        for (var j = 0; j < vertices.length; j++) {
+            if(l+1 < vertices.length ){
+                indices.push([j, l++, j+1])
+            }
         }
-        return {
-            vertices: this.vertices,
-            indices: this.indices
+        for (var k = 0;k<20;k++ ){
+            indices.push([k*360,k,k])
+        }
+        return new Shapes ({
+            vertices: vertices,
+            indices: indices
 
-        }
+        })
     },
 
     //http://www.webglacademy.com/courses.php#16
     shapes.sphere = function () {
-        this.vertices = []
-        this.indices = []
+        var vertices = []
+        var indices = []
         var numberOfVertices = 0;
         var theta, phi;
         for (var i = 0; i <= 64; i++) {
@@ -93,27 +105,27 @@ var Shapes = (function(){
             for (j = 0; j <= 32; j++) {
                 theta = 2 * Math.PI * j / 32;
 
-                this.vertices.push([Math.cos(theta) * Math.sin(phi), Math.cos(phi), Math.sin(theta) * Math.sin(phi)])
+                vertices.push([Math.cos(theta) * Math.sin(phi), Math.cos(phi), Math.sin(theta) * Math.sin(phi)])
                 if (i !== 0) {
-                    this.indices.push([i * (32 + 1) + j, i * (32 + 1) + j - 1, (i - 1) * (32 + 1) + j]);
+                    indices.push([i * (32 + 1) + j, i * (32 + 1) + j - 1, (i - 1) * (32 + 1) + j]);
                     numberOfVertices += 3;
                 }
                 if (i !== 0 && i !== 1) {
-                    this.indices.push([i * (32 + 1) + j - 1, (i - 1) * (32 + 1) + j, (i - 1) * (32 + 1) + j - 1]);
+                    indices.push([i * (32 + 1) + j - 1, (i - 1) * (32 + 1) + j, (i - 1) * (32 + 1) + j - 1]);
                     numberOfVertices += 3;
                 }
             }
         }
-        return {
-            vertices: this.vertices,
+        return new Shapes ({
+            vertices: vertices,
 
-            indices: this.indices
+            indices: indices
 
-        }
+        })
     },
 
     shapes.doublePyramid = function () {
-        return new shapes({
+        return new Shapes({
             vertices: [
                 [0, 0, 0],
                 [0.1, 0.1, 0.1],

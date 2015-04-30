@@ -1,15 +1,21 @@
 var matrix = function (size) {
     this.matrixArray = [];
-    for (var i = 0; i < size; i++) {
-        this.matrixArray[i] = [];
-        for (var j = 0; j < size; j++) {
-            if (i === j) {
-                this.matrixArray[i][j] = 1;
-            } else {
-                this.matrixArray[i][j] = 0;
+    if(size !== undefined){
+        for (var i = 0; i < size; i++) {
+            this.matrixArray[i] = [];
+            for (var j = 0; j < size; j++) {
+                if (i === j) {
+                    this.matrixArray[i][j] = 1;
+                } else {
+                    this.matrixArray[i][j] = 0;
+                }
             }
         }
-
+    }else{
+        this.matrixArray = [[1,0,0,0],
+                            [0,1,0,0],
+                            [0,0,1,0],
+                            [0,0,0,1]]
     }
 };
 
@@ -54,7 +60,6 @@ matrix.scale = function (scaleSize) {
     return matrix;
 },
 
-angle, x, y, z
 matrix.rotation = function (rotationArray) {
     var axisLength = Math.sqrt((rotationArray[1] * rotationArray[1]) + (rotationArray[2] * rotationArray[2]) + (rotationArray[3] * rotationArray[3])),
         s = Math.sin(rotationArray[0] * Math.PI / 180.0),
