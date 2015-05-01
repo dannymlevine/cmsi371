@@ -233,6 +233,7 @@
     rotationMatrix = gl.getUniformLocation(shaderProgram, "rotationMatrix");
     projectionMatrix = gl.getUniformLocation(shaderProgram, "projectionMatrix");
     instanceMatrix = gl.getUniformLocation(shaderProgram, "instanceMatrix")
+    cameraMatrix =  gl.getUniformLocation(shaderProgram, "cameraMatrix")
     
 
     // Note the additional variables.
@@ -241,12 +242,12 @@
     lightSpecular = gl.getUniformLocation(shaderProgram, "lightSpecular");
     shininess = gl.getUniformLocation(shaderProgram, "shininess");
 
-    //translation matrix setup
+    //matrix setup
     gl.uniformMatrix4fv(translationMatrix, gl.FALSE, new Float32Array(matrix.translation( [0, 0, 0]).toWebGL()));
     
     gl.uniformMatrix4fv(scaleMatrix, gl.FALSE, new Float32Array(matrix.scale([0.5, 0.5, 0.5]).toWebGL()));
 
-    //gl.uniformMatrix4fv(rotationMatrix, gl.FALSE, new Float32Array(matrix.rotation(currentRotation, 0.5, 1, 1).toWebGL()));
+    gl.uniformMatrix4fv(cameraMatrix,gl.FALSE, new Float32Array(matrix.cameraMatrix(1, 0, 0, 0, 1, 0, 0, 0, 1).toWebGL()));
 
     /*
      * Displays an individual object.

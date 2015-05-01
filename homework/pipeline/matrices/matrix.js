@@ -155,14 +155,18 @@ matrix.frustum = function (right, left, top, bottom, near, far) {
 },
 
 matrix.cameraMatrix = function(x1,y1,z1,x2,y2,z2,x3,y3,z3){
-    var xaxis = new vector1(x1,y1,z1)
-    var yaxis = new vector2(x2,y2,z2)
-    var zaxis = new vector3(x3,y3,z3)
+    var vector1 = new Vector(x1,y1,z1)
+    var vector2 = new Vector(x2,y2,z2)
+    var vector3 = new Vector(x3,y3,z3)
+
+    var zaxis = vector1.subtract(vector2).unit()
+    var yaxis = vector3.subtract(vector3.projection(zaxis)).unit()
+    var xaxis = yaxis.cross(zaxis)
 
     this.matrixArray = [
-        [xaxis.x, xaxis.y, xaxis.z, 0],
-        [yaxis.x, yaxis.y, xaxis.z, 0],
-        [zaxis.x, zaxis.y, xaxis.z, 0],
+        [xaxis.x, xaxis.y, xaxis.z, -vector1.dot(xaxis)],
+        [yaxis.x, yaxis.y, xaxis.z, -vector1.dot(yaxis)],
+        [zaxis.x, zaxis.y, xaxis.z, -vector1.dot(zaxis)],
         [0.0, 0.0, 0.0, 1.0]
     ];
 
