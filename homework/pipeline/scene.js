@@ -28,7 +28,7 @@
         lightPosition,
         lightDiffuse,
         lightSpecular,
-            // The should-now-be-familiar matrices.
+        // The should-now-be-familiar matrices.
         projectionMatrix,
         translationMatrix,
         scaleMatrix,
@@ -47,8 +47,8 @@
         j,
         maxj,
 
-    // Grab the WebGL rendering context.
-    gl = GLSLUtilities.getGL(canvas);
+        // Grab the WebGL rendering context.
+        gl = GLSLUtilities.getGL(canvas);
     if (!gl) {
 
 
@@ -66,81 +66,77 @@
     // Build the objects to display.
     // JD: 3(a)
     objectsToDraw = [
-        new Shapes({
-            color: {
-                r: 0.0,
-                g: 0.0,
-                b: 1.0
-            },
-            specularColor: {
-                r:1.0,
-                g:0.0,
-                b:1.0
-            },
-            shininess: 5,
-            transforms:{
-                scale: [0.5,0.5,0.5],
-                translate: [0,0,0],
-                rotate: [90,1,2,3]
-            },
-            normals: Shapes.toNormalArray(Shapes.cylinder()),
-            vertices: Shapes.toRawTriangleArray(Shapes.cylinder()),
-            mode: gl.TRIANGLES,
-        }),
+    new Shapes({
+        color: {
+            r: 0.0,
+            g: 0.0,
+            b: 1.0
+        },
+        specularColor: {
+            r: 1.0,
+            g: 0.0,
+            b: 1.0
+        },
+        shininess: 5,
+        transforms: {
+            scale: [0.5, 0.5, 0.5],
+            translate: [0, 0, 0],
+            rotate: [90, 1, 2, 3]
+        },
+        normals: Shapes.toNormalArray(Shapes.cylinder()),
+        vertices: Shapes.toRawTriangleArray(Shapes.cylinder()),
+        mode: gl.TRIANGLES
+    }),
 
+    new Shapes({
+        color: {
+            r: 0.0,
+            g: 1.0,
+            b: 0.0
+        },
+        specularColor: {
+            r: 1.0,
+            g: 1.0,
+            b: 1.0
+        },
+        shininess: 10,
+        normals: Shapes.toNormalArray(Shapes.doublePyramid()),
+        vertices: Shapes.toRawTriangleArray(Shapes.doublePyramid()),
+        transforms: {
+            scale: [1, 1, 1],
+            translate: [0, 0, 0],
+            rotate: [90, 1, 2, 3]
+        },
+        mode: gl.TRIANGLES,
+        children: [
         new Shapes({
             color: {
-                r: 0.0,
-                g: 1.0,
+                r: 1.0,
+                g: 0.0,
                 b: 0.0
             },
             specularColor: {
-                r:1.0,
-                g:1.0,
-                b:1.0
+                r: 1.0,
+                g: 0.0,
+                b: 1.0
             },
             shininess: 10,
-            normals: Shapes.toNormalArray(Shapes.doublePyramid()),
-            vertices: Shapes.toRawTriangleArray(Shapes.doublePyramid()),
-            transforms:{
-                scale: [1,1,1],
-                translate: [0,0,0],
-                rotate: [90,1,2,3]
+            transforms: {
+                scale: [1, 1, 1],
+                translate: [0, 0, 0],
+                rotate: [90, 1, 2, 3]
             },
-            mode: gl.TRIANGLES,
-            children:[
-                new Shapes({
-                    color: {
-                        r: 1.0,
-                        g: 0.0,
-                        b: 0.0
-                    },
-                    specularColor: {
-                        r:1.0,
-                        g:0.0,
-                        b:1.0
-                    },
-                    shininess: 10,
-                    transforms:{
-                        scale: [1,1,1],
-                        translate: [0,0,0],
-                        rotate: [90,1,2,3]
-                    },
-                    normals: Shapes.toVertexNormalArray(Shapes.sphere()),
-                    vertices: Shapes.toRawTriangleArray(Shapes.sphere()),
-                    mode: gl.LINES
-            })
+            normals: Shapes.toVertexNormalArray(Shapes.sphere()),
+            vertices: Shapes.toRawTriangleArray(Shapes.sphere()),
+            mode: gl.LINES
+        })
 
-            ]
-       })
-    ];
+        ]
+    })];
 
-
-
-    console.log(objectsToDraw)
 
     // Pass the vertices to WebGL.
-    var passVertices = function(objectsToDraw){
+    var passVertices = function (objectsToDraw) {
         for (i = 0, maxi = objectsToDraw.length; i < maxi; i += 1) {
             objectsToDraw[i].buffer = GLSLUtilities.initVertexBuffer(gl,
             objectsToDraw[i].vertices);
@@ -166,27 +162,26 @@
                 // array into an array of copies of itself.
                 objectsToDraw[i].specularColors = [];
                 for (j = 0, maxj = objectsToDraw[i].vertices.length / 3;
-                        j < maxj; j += 1) {
+                j < maxj; j += 1) {
                     objectsToDraw[i].specularColors = objectsToDraw[i].specularColors.concat(
-                        objectsToDraw[i].specularColor.r,
-                        objectsToDraw[i].specularColor.g,
-                        objectsToDraw[i].specularColor.b
-                    );
+                    objectsToDraw[i].specularColor.r,
+                    objectsToDraw[i].specularColor.g,
+                    objectsToDraw[i].specularColor.b);
                 }
             }
             objectsToDraw[i].specularBuffer = GLSLUtilities.initVertexBuffer(gl,
-                    objectsToDraw[i].specularColors);
+            objectsToDraw[i].specularColors);
 
             // One more buffer: normals.
             objectsToDraw[i].normalBuffer = GLSLUtilities.initVertexBuffer(gl,
-                    objectsToDraw[i].normals); 
+            objectsToDraw[i].normals);
 
-            if(objectsToDraw[i].children && (objectsToDraw[i].children.length !== 0)){
+            if (objectsToDraw[i].children && (objectsToDraw[i].children.length !== 0)) {
 
-                passVertices(objectsToDraw[i].children)
-            } 
+                passVertices(objectsToDraw[i].children);
+            }
         }
-    }
+    };
 
     // Initialize the shaders.
     shaderProgram = GLSLUtilities.initSimpleShaderProgram(
@@ -232,9 +227,9 @@
     scaleMatrix = gl.getUniformLocation(shaderProgram, "scaleMatrix");
     rotationMatrix = gl.getUniformLocation(shaderProgram, "rotationMatrix");
     projectionMatrix = gl.getUniformLocation(shaderProgram, "projectionMatrix");
-    instanceMatrix = gl.getUniformLocation(shaderProgram, "instanceMatrix")
-    cameraMatrix =  gl.getUniformLocation(shaderProgram, "cameraMatrix")
-    
+    instanceMatrix = gl.getUniformLocation(shaderProgram, "instanceMatrix");
+    cameraMatrix = gl.getUniformLocation(shaderProgram, "cameraMatrix");
+
 
     // Note the additional variables.
     lightPosition = gl.getUniformLocation(shaderProgram, "lightPosition");
@@ -243,26 +238,25 @@
     shininess = gl.getUniformLocation(shaderProgram, "shininess");
 
     //matrix setup
-    gl.uniformMatrix4fv(translationMatrix, gl.FALSE, new Float32Array(matrix.translation( [0, 0, 0]).toWebGL()));
-    
+    gl.uniformMatrix4fv(translationMatrix, gl.FALSE, new Float32Array(matrix.translation([0, 0, 0]).toWebGL()));
+
     gl.uniformMatrix4fv(scaleMatrix, gl.FALSE, new Float32Array(matrix.scale([0.5, 0.5, 0.5]).toWebGL()));
 
-    gl.uniformMatrix4fv(cameraMatrix,gl.FALSE, new Float32Array(matrix.cameraMatrix(1, 0, 0, 0, 1, 0, 0, 0, 1).toWebGL()));
+    gl.uniformMatrix4fv(cameraMatrix, gl.FALSE, new Float32Array(matrix.cameraMatrix(1, 0, 0, 0, 1, 0, 0, 0, 1).toWebGL()));
 
     /*
      * Displays an individual object.
      */
-    drawObject = function (object, currentTransform ) {
+    drawObject = function (object, currentTransform) {
         var instanceMat = new matrix(4);
         instanceMat = instanceMat.multiplication(
-                         matrix.translation(object.transforms.translate)).multiplication(
-                             matrix.scale(object.transforms.scale)).multiplication(
-                                 matrix.rotation(object.transforms.rotate)).multiplication(currentTransform);
+        matrix.translation(object.transforms.translate)).multiplication(
+        matrix.scale(object.transforms.scale)).multiplication(
+        matrix.rotation(object.transforms.rotate)).multiplication(currentTransform);
 
 
         gl.uniformMatrix4fv(instanceMatrix, gl.FALSE, new Float32Array(instanceMat.toWebGL()));
-        console.log(instanceMat)
-    
+
 
         // Set the varying colors.
         gl.bindBuffer(gl.ARRAY_BUFFER, object.colorBuffer);
@@ -282,10 +276,10 @@
         gl.vertexAttribPointer(vertexPosition, 3, gl.FLOAT, false, 0, 0);
         gl.drawArrays(object.mode, 0, object.vertices.length / 3);
         // JD: 8(a)
-        if(object.children.length>=1){
-            for(i=0; i<object.children.length;i++){
+        if (object.children.length >= 1) {
+            for (i = 0; i < object.children.length; i++) {
 
-                drawObject(object.children[i],instanceMat)
+                drawObject(object.children[i], instanceMat);
             }
         }
     };
@@ -299,11 +293,11 @@
 
         // Set up the rotation matrix.
         gl.uniformMatrix4fv(rotationMatrix, gl.FALSE, new Float32Array(matrix.rotation([currentRotation, 0.5, 1, 1]).toWebGL()));
-        
+
         // Display the objects.
         for (i = 0, maxi = objectsToDraw.length; i < maxi; i += 1) {
 
-            drawObject(objectsToDraw[i],new matrix());
+            drawObject(objectsToDraw[i], new matrix());
         }
 
         // All done.
@@ -348,20 +342,16 @@
         window.requestAnimationFrame(advanceScene);
     };
 
-    gl.uniformMatrix4fv(projectionMatrix, gl.FALSE, new Float32Array(matrix.orthographic(
-        -2 * (canvas.width / canvas.height),
-        2 * (canvas.width / canvas.height),
-        -2,
-        2,
-        -10,
-        10
-    ).toWebGL()));
+    gl.uniformMatrix4fv(projectionMatrix, gl.FALSE, new Float32Array(matrix.orthographic(-2 * (canvas.width / canvas.height),
+    2 * (canvas.width / canvas.height), -2,
+    2, -10,
+    10).toWebGL()));
 
     gl.uniform4fv(lightPosition, [500.0, 1000.0, 100.0, 1.0]);
     gl.uniform3fv(lightDiffuse, [1.0, 1.0, 1.0]);
     gl.uniform3fv(lightSpecular, [1.0, 1.0, 1.0]);
-    
-    
+
+
 
     // Set up the rotation toggle: clicking on the canvas does it.
     $(canvas).click(function () {

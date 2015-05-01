@@ -4,26 +4,34 @@
  * converting these into "raw" coordinate arrays.
  */
 
-var Shapes = (function(){
-    var shapes = function(attributes){
-        attributes.transforms = attributes.transforms || {}
-        this.color = attributes.color || {r:0,b:1,g:0}
-        this.children = attributes.children || []
-        this.vertices = attributes.vertices || []
-        this.indices = attributes.indices || []
-        this.shininess = attributes.shininess || 5
-        this.specularColor = attributes.specularColor || {r:0,b:1,g:0}
-        this.normals = attributes.normals || []
-        this.mode = attributes.mode
-        this.transforms = {}
-        this.transforms.scale = attributes.transforms.scale || [0.5,0.5,0.5]
-        this.transforms.translate = attributes.transforms.translate || [1,1,1]
-        this.transforms.rotate = attributes.transforms.rotate || [90,1,2,3] 
+var Shapes = (function () {
+    var shapes = function (attributes) {
+        attributes.transforms = attributes.transforms || {};
+        this.color = attributes.color || {
+            r: 0,
+            b: 1,
+            g: 0
+        };
+        this.children = attributes.children || [];
+        this.vertices = attributes.vertices || [];
+        this.indices = attributes.indices || [];
+        this.shininess = attributes.shininess || 5;
+        this.specularColor = attributes.specularColor || {
+            r: 0,
+            b: 1,
+            g: 0
+        };
+        this.normals = attributes.normals || [];
+        this.mode = attributes.mode;
+        this.transforms = {};
+        this.transforms.scale = attributes.transforms.scale || [0.5, 0.5, 0.5];
+        this.transforms.translate = attributes.transforms.translate || [1, 1, 1];
+        this.transforms.rotate = attributes.transforms.rotate || [90, 1, 2, 3];
     };
 
     shapes.cylinder = function () {
-        var vertices = []
-        var indices = []
+        var vertices = [];
+        var indices = [];
 
         var center = [0, 0, 0];
         var radius = 0.5;
@@ -38,28 +46,28 @@ var Shapes = (function(){
             s = Math.sin(angleInRadians);
             c = Math.cos(angleInRadians);
             for (var i = radius; i >= -radius; i -= 0.05) {
-                vertices.push([s / 2, i, c / 2])
+                vertices.push([s / 2, i, c / 2]);
             }
         }
         for (var j = 0; j < vertices.length; j++) {
-            if(l+1 < vertices.length ){
-                indices.push([j, l++, j+1])
+            if (l + 1 < vertices.length) {
+                indices.push([j, l++, j + 1]);
             }
         }
-        for (var k = 0;k<20;k++ ){
-            indices.push([k*360,k,k])
+        for (var k = 0; k < 20; k++) {
+            indices.push([k * 360, k, k]);
         }
-        return new Shapes ({
+        return new Shapes({
             vertices: vertices,
 
             indices: indices
 
-        })
+        });
     },
 
     shapes.cone = function () {
-        var vertices = []
-        var indices = []
+        var vertices = [];
+        var indices = [];
         var center = [0, 0, 0];
         var radius = 0.5;
         var l = 20;
@@ -74,29 +82,29 @@ var Shapes = (function(){
             c = Math.cos(angleInRadians);
 
             for (var i = radius; i >= -radius; i -= 0.05) {
-                var ratio = i - 1 * radius
-                vertices.push([s / 2 * ratio, i, c / 2 * ratio])
+                var ratio = i - 1 * radius;
+                vertices.push([s / 2 * ratio, i, c / 2 * ratio]);
             }
         }
         for (var j = 0; j < vertices.length; j++) {
-            if(l+1 < vertices.length ){
-                indices.push([j, l++, j+1])
+            if (l + 1 < vertices.length) {
+                indices.push([j, l++, j + 1]);
             }
         }
-        for (var k = 0;k<20;k++ ){
-            indices.push([k*360,k,k])
+        for (var k = 0; k < 20; k++) {
+            indices.push([k * 360, k, k]);
         }
-        return new Shapes ({
+        return new Shapes({
             vertices: vertices,
             indices: indices
 
-        })
+        });
     },
 
     //http://www.webglacademy.com/courses.php#16
     shapes.sphere = function () {
-        var vertices = []
-        var indices = []
+        var vertices = [];
+        var indices = [];
         var numberOfVertices = 0;
         var theta, phi;
         for (var i = 0; i <= 64; i++) {
@@ -105,7 +113,7 @@ var Shapes = (function(){
             for (j = 0; j <= 32; j++) {
                 theta = 2 * Math.PI * j / 32;
 
-                vertices.push([Math.cos(theta) * Math.sin(phi), Math.cos(phi), Math.sin(theta) * Math.sin(phi)])
+                vertices.push([Math.cos(theta) * Math.sin(phi), Math.cos(phi), Math.sin(theta) * Math.sin(phi)]);
                 if (i !== 0) {
                     indices.push([i * (32 + 1) + j, i * (32 + 1) + j - 1, (i - 1) * (32 + 1) + j]);
                     numberOfVertices += 3;
@@ -116,12 +124,12 @@ var Shapes = (function(){
                 }
             }
         }
-        return new Shapes ({
+        return new Shapes({
             vertices: vertices,
 
             indices: indices
 
-        })
+        });
     },
 
     shapes.doublePyramid = function () {
@@ -147,7 +155,7 @@ var Shapes = (function(){
                 [5, 7, 8],
                 [6, 7, 8]
             ]
-        })
+        });
     },
 
     /*
@@ -186,7 +194,7 @@ var Shapes = (function(){
         for (i = 0, maxi = indexedVertices.indices.length; i < maxi; i += 1) {
             for (j = 0, maxj = indexedVertices.indices[i].length; j < maxj; j += 1) {
                 result = result.concat(
-                    // JD: 7(a)
+                // JD: 7(a)
                 indexedVertices.vertices[
                 indexedVertices.indices[i][j]],
 
@@ -239,8 +247,7 @@ var Shapes = (function(){
             // We then use this same normal for every vertex in this face.
             for (j = 0, maxj = indexedVertices.indices[i].length; j < maxj; j += 1) {
                 result = result.concat(
-                    [ normal.x(), normal.y(), normal.z() ]
-                );
+                [normal.x(), normal.y(), normal.z()]);
             }
         }
 
@@ -268,13 +275,12 @@ var Shapes = (function(){
                 p = indexedVertices.vertices[indexedVertices.indices[i][j]];
                 normal = new Vector(p[0], p[1], p[2]).unit();
                 result = result.concat(
-                    [ normal.x(), normal.y(), normal.z() ]
-                );
+                [normal.x(), normal.y(), normal.z()]);
             }
         }
 
         return result;
-    }
-    return shapes
+    };
+    return shapes;
 
-})()
+})();

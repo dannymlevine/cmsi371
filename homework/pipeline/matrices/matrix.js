@@ -1,6 +1,6 @@
 var matrix = function (size) {
     this.matrixArray = [];
-    if(size !== undefined){
+    if (size !== undefined) {
         for (var i = 0; i < size; i++) {
             this.matrixArray[i] = [];
             for (var j = 0; j < size; j++) {
@@ -11,11 +11,13 @@ var matrix = function (size) {
                 }
             }
         }
-    }else{
-        this.matrixArray = [[1,0,0,0],
-                            [0,1,0,0],
-                            [0,0,1,0],
-                            [0,0,0,1]]
+    } else {
+        this.matrixArray = [
+            [1, 0, 0, 0],
+            [0, 1, 0, 0],
+            [0, 0, 1, 0],
+            [0, 0, 0, 1]
+        ];
     }
 };
 
@@ -154,14 +156,14 @@ matrix.frustum = function (right, left, top, bottom, near, far) {
     return matrix;
 },
 
-matrix.cameraMatrix = function(x1,y1,z1,x2,y2,z2,x3,y3,z3){
-    var vector1 = new Vector(x1,y1,z1)
-    var vector2 = new Vector(x2,y2,z2)
-    var vector3 = new Vector(x3,y3,z3)
+matrix.cameraMatrix = function (x1, y1, z1, x2, y2, z2, x3, y3, z3) {
+    var vector1 = new Vector(x1, y1, z1);
+    var vector2 = new Vector(x2, y2, z2);
+    var vector3 = new Vector(x3, y3, z3);
 
-    var zaxis = vector1.subtract(vector2).unit()
-    var yaxis = vector3.subtract(vector3.projection(zaxis)).unit()
-    var xaxis = yaxis.cross(zaxis)
+    var zaxis = vector1.subtract(vector2).unit();
+    var yaxis = vector3.subtract(vector3.projection(zaxis)).unit();
+    var xaxis = yaxis.cross(zaxis);
 
     this.matrixArray = [
         [xaxis.x, xaxis.y, xaxis.z, -vector1.dot(xaxis)],
@@ -170,8 +172,8 @@ matrix.cameraMatrix = function(x1,y1,z1,x2,y2,z2,x3,y3,z3){
         [0.0, 0.0, 0.0, 1.0]
     ];
 
-    return matrix
-}
+    return matrix;
+};
 
 matrix.prototype.toWebGL = function () {
     var result = [];
