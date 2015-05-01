@@ -33,6 +33,7 @@
         translationMatrix,
         scaleMatrix,
         rotationMatrix,
+        cameraMatrix,
 
         // An individual "draw object" function.
         drawObject,
@@ -49,7 +50,7 @@
     // Grab the WebGL rendering context.
     gl = GLSLUtilities.getGL(canvas);
     if (!gl) {
-        alert("No WebGL context found...sorry.");
+
 
         // No WebGL, no use going on...
         return;
@@ -65,96 +66,27 @@
     // Build the objects to display.
     // JD: 3(a)
     objectsToDraw = [
-        // new Shapes({
-        //     color: {
-        //         r: 0.0,
-        //         g: 0.0,
-        //         b: 1.0
-        //     },
-        //     specularColor: {
-        //         r:1.0,
-        //         g:0.0,
-        //         b:1.0
-        //     },
-        //     shininess: 5,
-        //     transforms:{
-        //         scale: [0.5,0.5,0.5],
-        //         translate: [1,2,3],
-        //         rotate: [90,1,2,3]
-        //     },
-        //     normals: Shapes.toNormalArray(Shapes.cylinder()),
-        //     vertices: Shapes.toRawTriangleArray(Shapes.cylinder()),
-        //     mode: gl.TRIANGLES
-        // }),
-
-        // new Shapes({
-        //     color: {
-        //         r: 0.0,
-        //         g: 0.0,
-        //         b: 1.0
-        //     },
-        //     specularColor: {
-        //         r:1.0,
-        //         g:1.0,
-        //         b:1.0
-        //     },
-        //     shininess: 10,
-        //     transforms:{
-        //         scale: [0.5,0.5,0.5],
-        //         translate: [1,2,3],
-        //         rotate: [90,1,2,3]
-        //     },
-        //     normals: Shapes.toVertexNormalArray(Shapes.cone()),
-        //     vertices: Shapes.toRawTriangleArray(Shapes.cone()),
-        //     mode: gl.TRIANGLES,
-        //     children: [
-        //         new Shapes({
-        //             color: {
-        //                 r: 0.0,
-        //                 g: 1.0,
-        //                 b: 0.0
-        //             },
-        //             specularColor: {
-        //                 r:1.0,
-        //                 g:1.0,
-        //                 b:1.0
-        //             },
-        //             shininess: 10,
-        //             normals: Shapes.toNormalArray(Shapes.doublePyramid()),
-        //             vertices: Shapes.toRawTriangleArray(Shapes.doublePyramid()),
-        //             transforms:{
-        //                 scale: [0.5,0.5,0.5],
-        //                 translate: [1,0,3],
-        //                 rotate: [90,1,2,3]
-        //             },
-        //             mode: gl.TRIANGLES
-        //         })
-
-        //     ]
-
-        // }),
-
-        // new Shapes({
-        //      color: {
-        //         r: 1.0,
-        //         g: 0.0,
-        //         b: 0.0
-        //     },
-        //     specularColor: {
-        //         r:1.0,
-        //         g:0.0,
-        //         b:1.0
-        //     },
-        //     shininess: 10,
-        //     transforms:{
-        //         scale: [0.5,0.5,0.5],
-        //         translate: [1,2,3],
-        //         rotate: [90,1,2,3]
-        //     },
-        //     normals: Shapes.toVertexNormalArray(Shapes.sphere()),
-        //     vertices: Shapes.toRawTriangleArray(Shapes.sphere()),
-        //     mode: gl.LINES
-        // }),
+        new Shapes({
+            color: {
+                r: 0.0,
+                g: 0.0,
+                b: 1.0
+            },
+            specularColor: {
+                r:1.0,
+                g:0.0,
+                b:1.0
+            },
+            shininess: 5,
+            transforms:{
+                scale: [0.5,0.5,0.5],
+                translate: [0,0,0],
+                rotate: [90,1,2,3]
+            },
+            normals: Shapes.toNormalArray(Shapes.cylinder()),
+            vertices: Shapes.toRawTriangleArray(Shapes.cylinder()),
+            mode: gl.TRIANGLES,
+        }),
 
         new Shapes({
             color: {
@@ -171,8 +103,8 @@
             normals: Shapes.toNormalArray(Shapes.doublePyramid()),
             vertices: Shapes.toRawTriangleArray(Shapes.doublePyramid()),
             transforms:{
-                scale: [0.5,0.5,0.5],
-                translate: [1,0,3],
+                scale: [1,1,1],
+                translate: [0,0,0],
                 rotate: [90,1,2,3]
             },
             mode: gl.TRIANGLES,
@@ -190,22 +122,24 @@
                     },
                     shininess: 10,
                     transforms:{
-                        scale: [0.5,0.5,0.5],
-                        translate: [1,2,3],
+                        scale: [1,1,1],
+                        translate: [0,0,0],
                         rotate: [90,1,2,3]
                     },
                     normals: Shapes.toVertexNormalArray(Shapes.sphere()),
                     vertices: Shapes.toRawTriangleArray(Shapes.sphere()),
                     mode: gl.LINES
-                })
-           ]
+            })
+
+            ]
        })
     ];
-    // JD: 5(a)
+
+
+
     console.log(objectsToDraw)
 
     // Pass the vertices to WebGL.
-    // JD: 6(a)
     var passVertices = function(objectsToDraw){
         for (i = 0, maxi = objectsToDraw.length; i < maxi; i += 1) {
             objectsToDraw[i].buffer = GLSLUtilities.initVertexBuffer(gl,
@@ -248,6 +182,7 @@
                     objectsToDraw[i].normals); 
 
             if(objectsToDraw[i].children && (objectsToDraw[i].children.length !== 0)){
+
                 passVertices(objectsToDraw[i].children)
             } 
         }
@@ -262,19 +197,19 @@
     // Very cursory error-checking here...
     function (shader) {
         abort = true;
-        alert("Shader problem: " + gl.getShaderInfoLog(shader));
+
     },
 
     // Another simplistic error check: we don't even access the faulty
     // shader program.
     function (shaderProgram) {
         abort = true;
-        alert("Could not link shaders...sorry.");
+
     });
 
     // If the abort variable is true here, we can't continue.
     if (abort) {
-        alert("Fatal errors encountered; we cannot continue.");
+
         return;
     }
 
@@ -297,6 +232,7 @@
     scaleMatrix = gl.getUniformLocation(shaderProgram, "scaleMatrix");
     rotationMatrix = gl.getUniformLocation(shaderProgram, "rotationMatrix");
     projectionMatrix = gl.getUniformLocation(shaderProgram, "projectionMatrix");
+    instanceMatrix = gl.getUniformLocation(shaderProgram, "instanceMatrix")
     
 
     // Note the additional variables.
@@ -316,16 +252,16 @@
      * Displays an individual object.
      */
     drawObject = function (object, currentTransform ) {
-        instanceMatrix = gl.getUniformLocation(shaderProgram, "instanceMatrix");
-        gl.uniformMatrix4fv(instanceMatrix, gl.FALSE, new Float32Array(matrix.toWebGL()));
-        
+        var instanceMat = new matrix(4);
+        instanceMat = instanceMat.multiplication(
+                         matrix.translation(object.transforms.translate)).multiplication(
+                             matrix.scale(object.transforms.scale)).multiplication(
+                                 matrix.rotation(object.transforms.rotate)).multiplication(currentTransform);
 
-        var instanceMatrix = new matrix(4);
-        instanceMatrix = instanceMatrix.multiplication(
-                         matrix.scale(object.transforms.scale)).multiplication(
-                             matrix.translation(object.transforms.translate)).multiplication(
-                                 matrix.rotation(object.transforms.rotate)).multiplication(currentTransform)
 
+        gl.uniformMatrix4fv(instanceMatrix, gl.FALSE, new Float32Array(instanceMat.toWebGL()));
+        console.log(instanceMat)
+    
 
         // Set the varying colors.
         gl.bindBuffer(gl.ARRAY_BUFFER, object.colorBuffer);
@@ -345,9 +281,10 @@
         gl.vertexAttribPointer(vertexPosition, 3, gl.FLOAT, false, 0, 0);
         gl.drawArrays(object.mode, 0, object.vertices.length / 3);
         // JD: 8(a)
-        if(object.children){
+        if(object.children.length>=1){
             for(i=0; i<object.children.length;i++){
-                drawObject(object.children[i],instanceMatrix)
+
+                drawObject(object.children[i],instanceMat)
             }
         }
     };
@@ -364,7 +301,7 @@
         
         // Display the objects.
         for (i = 0, maxi = objectsToDraw.length; i < maxi; i += 1) {
-            
+
             drawObject(objectsToDraw[i],new matrix());
         }
 
@@ -377,6 +314,7 @@
      */
     previousTimestamp = null,
     advanceScene = function (timestamp) {
+
         // Check if the user has turned things off.
         if (!animationActive) {
             return;
@@ -433,8 +371,9 @@
         }
     });
 
-    
-    passVertices(objectsToDraw)
+
+    passVertices(objectsToDraw);
+
     // Draw the initial scene.
     drawScene();
 

@@ -154,7 +154,7 @@ matrix.frustum = function (right, left, top, bottom, near, far) {
     return matrix;
 },
 
-matrix.lookAtMatrix = function(x1,y1,z1,x2,y2,z2,x3,y3,z3){
+matrix.cameraMatrix = function(x1,y1,z1,x2,y2,z2,x3,y3,z3){
     var xaxis = new vector1(x1,y1,z1)
     var yaxis = new vector2(x2,y2,z2)
     var zaxis = new vector3(x3,y3,z3)
@@ -168,6 +168,12 @@ matrix.lookAtMatrix = function(x1,y1,z1,x2,y2,z2,x3,y3,z3){
 
     return matrix
 }
+
+matrix.prototype.toWebGL = function () {
+    var result = [];
+    result = result.concat.apply(result, this.matrixArray);
+    return result;
+};
 
 matrix.toWebGL = function () {
     var result = [];
